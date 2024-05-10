@@ -1,0 +1,1 @@
+Repository for the Big Data Technologies course (A.Y 2023/2024) of the Master in Data Science @ University of Trento.

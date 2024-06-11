@@ -1,9 +1,6 @@
 import pandas as pd
 import os
 
-# NATIVE FOLDER : /Users/nicolosimonato/Desktop/dataset_energyconsumption
-# SAVE FOLDER : /Users/nicolosimonato/Desktop/UNITRENTO/BigDataTech/Data
-
 def load_data(path):
     """
     Load the data from the specified path

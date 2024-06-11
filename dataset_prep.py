@@ -40,6 +40,9 @@ weather_path = os.path.join(native_dataset_folder,'weather_train.csv')
 save_path_historical_consumptions = os.path.join(base_dir, 'Data/DB/Sensors/historical_consumptions.csv')
 save_path_new_consumptions = os.path.join(base_dir, 'Data/New_data/Sensors/new_consumptions.csv')
 
+# Save path for site data
+save_path_sites = os.path.join(base_dir, 'Data/DB/sites.csv')
+
 # Save path for building data
 save_path_building = os.path.join(base_dir, 'Data/DB/building_data.csv')
 
@@ -64,10 +67,17 @@ weather_data = weather_data[['site_id', 'timestamp', 'air_temperature', 'cloud_c
 
 # Filter data for the selected building IDs and meter 0 (electricity)
 historical_data = historical_data[(historical_data['building_id'].isin(random_building_ids)) & (historical_data['meter'] == 0)]
+
 # Remove the 'meter' column from the consumptions data as it is not needed
 historical_data.drop('meter', axis=1, inplace=True)
 
+# Filtering the buildings 
 building_data = building_data[building_data['building_id'].isin(random_building_ids)]
+
+# Convert the year_built and floor_count columns to integers
+building_data['year_built'] = building_data['year_built'].fillna(0).astype(int)
+building_data['floor_count'] = building_data['floor_count'].fillna(0).astype(int)
+
 weather_data = weather_data[weather_data['site_id'].isin(random_sites)]
 
 # Convert timestamp columns to datetime
@@ -86,10 +96,13 @@ historical_consumptions = historical_data[historical_data['timestamp'] <= split_
 new_consumptions = historical_data[historical_data['timestamp'] > split_timestamp]
 
 # save the data in the new repositories
+ 
+save_data(random_sites, save_path_sites)
+
+save_data(building_data, save_path_building)
+
 save_data(historical_weather, save_path_historical_weather)
 save_data(new_weather, save_path_new_weather)
 
 save_data(historical_consumptions, save_path_historical_consumptions)
 save_data(new_consumptions, save_path_new_consumptions)
-
-save_data(building_data, save_path_building)

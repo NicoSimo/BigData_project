@@ -63,24 +63,27 @@ random_building_ids = filtered_sites['building_id'].sample(n=25, random_state=42
 weather_data = weather_data[['site_id', 'timestamp', 'air_temperature', 'cloud_coverage', 'precip_depth_1_hr']]
 
 # Filter data for the selected building IDs and meter 0 (electricity)
-new_data = historical_data[(historical_data['building_id'].isin(random_building_ids)) & (historical_data['meter'] == 0)]
-new_building_data = building_data[building_data['building_id'].isin(random_building_ids)]
-new_weather_data = weather_data[weather_data['site_id'].isin(random_sites)]
+historical_data = historical_data[(historical_data['building_id'].isin(random_building_ids)) & (historical_data['meter'] == 0)]
+# Remove the 'meter' column from the consumptions data as it is not needed
+historical_data.drop('meter', axis=1, inplace=True)
+
+building_data = building_data[building_data['building_id'].isin(random_building_ids)]
+weather_data = weather_data[weather_data['site_id'].isin(random_sites)]
 
 # Convert timestamp columns to datetime
-new_weather_data['timestamp'] = pd.to_datetime(new_weather_data['timestamp'])
-new_data['timestamp'] = pd.to_datetime(new_data['timestamp'])
+weather_data['timestamp'] = pd.to_datetime(weather_data['timestamp'])
+historical_data['timestamp'] = pd.to_datetime(historical_data['timestamp'])
 
 # Define the split timestamp
 split_timestamp = pd.Timestamp('2016-09-01 23:00:00')
 
 # Split the weather data based on the timestamp
-historical_weather = new_weather_data[new_weather_data['timestamp'] <= split_timestamp]
-new_weather = new_weather_data[new_weather_data['timestamp'] > split_timestamp]
+historical_weather = weather_data[weather_data['timestamp'] <= split_timestamp]
+new_weather = weather_data[weather_data['timestamp'] > split_timestamp]
 
 # Split the historical data based on the timestamp
-historical_consumptions = new_data[new_data['timestamp'] <= split_timestamp]
-new_consumptions = new_data[new_data['timestamp'] > split_timestamp]
+historical_consumptions = historical_data[historical_data['timestamp'] <= split_timestamp]
+new_consumptions = historical_data[historical_data['timestamp'] > split_timestamp]
 
 # save the data in the new repositories
 save_data(historical_weather, save_path_historical_weather)
@@ -89,4 +92,4 @@ save_data(new_weather, save_path_new_weather)
 save_data(historical_consumptions, save_path_historical_consumptions)
 save_data(new_consumptions, save_path_new_consumptions)
 
-save_data(new_building_data, save_path_building)
+save_data(building_data, save_path_building)

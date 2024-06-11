@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../dataset_energyconsumption"
+		},
+		{
+			"path": "../Data"
+		}
+	],
+	"settings": {}
+}

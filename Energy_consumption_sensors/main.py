@@ -36,10 +36,10 @@ def trigger_sensors():
     for thread in threads:
         thread.join()
 
-# Schedule the job every 5 seconds
-schedule.every(5).seconds.do(trigger_sensors)
+# Schedule the job every 30 seconds 
+schedule.every(30).seconds.do(trigger_sensors) # In the real case scenario it would be every 3600 (60*60) seconds (1 hour).
 
 # Run the scheduler
 while True:
     schedule.run_pending()
-    time.sleep(10)
+    time.sleep(1)

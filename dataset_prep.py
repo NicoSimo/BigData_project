@@ -37,7 +37,7 @@ building_path = os.path.join(native_dataset_folder,'building_metadata.csv')
 weather_path = os.path.join(native_dataset_folder,'weather_train.csv')
 
 # Save paths for consumption data
-save_path_historical_consumptions = os.path.join(base_dir, 'Data/New_data/Weather/new_weather.csv')
+save_path_historical_consumptions = os.path.join(base_dir, 'Data/DB/Sensors/historical_consumptions.csv')
 save_path_new_consumptions = os.path.join(base_dir, 'Data/New_data/Sensors/new_consumptions.csv')
 
 # Save path for building data
@@ -58,6 +58,9 @@ filtered_sites = building_data[building_data['site_id'].isin(random_sites)]
 
 # Select 25 unique building IDs with a fixed seed
 random_building_ids = filtered_sites['building_id'].sample(n=25, random_state=42)
+
+# Filter weather data to only keep relevant informations
+weather_data = weather_data[['site_id', 'timestamp', 'air_temperature', 'cloud_coverage', 'precip_depth_1_hr']]
 
 # Filter data for the selected building IDs and meter 0 (electricity)
 new_data = historical_data[(historical_data['building_id'].isin(random_building_ids)) & (historical_data['meter'] == 0)]
@@ -83,7 +86,7 @@ new_consumptions = new_data[new_data['timestamp'] > split_timestamp]
 save_data(historical_weather, save_path_historical_weather)
 save_data(new_weather, save_path_new_weather)
 
-save_data(historical_consumptions, save_path_historical_weather)
-save_data(new_consumptions, save_path_new_weather)
+save_data(historical_consumptions, save_path_historical_consumptions)
+save_data(new_consumptions, save_path_new_consumptions)
 
 save_data(new_building_data, save_path_building)

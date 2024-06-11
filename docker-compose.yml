@@ -4,7 +4,7 @@ services:
   postgres:
     image: postgres
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: Team3
     volumes:
       - postgres-data:/var/lib/postgresql/data
 

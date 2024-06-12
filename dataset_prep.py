@@ -106,3 +106,4 @@ save_data(new_weather, save_path_new_weather)
 
 save_data(historical_consumptions, save_path_historical_consumptions)
 save_data(new_consumptions, save_path_new_consumptions)
+

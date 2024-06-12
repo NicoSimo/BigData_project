@@ -20,6 +20,22 @@ In the 'Consumers' repository, there are 2 different consumers.
 The first one is the postgre_consumer, used to transfer the data on the PostgreSQL database to store the data. (TO DO)
 The second one is the redis_consumer, used to transfer the data on Redis to perform the prediction.
 
+Added Data_fetching/dask_fetch.py, planning of using DASK to retrieve the data from redis and load them in a dask df. (STILL UNTESTED --> TO DO)
 
+Moving all the python scripts in a dedicated container. (TO DO) --> NEED TO MODIFY THE dockerfile
+
+
+
+To run the whole project you need (in order):
+
+- Download the dataset 
+- Fix the paths in the dataset_prep.py file 
+- Run 'pip install requirements.txt -r'
+- 'Docker-compose up -d' to run the containers
+- (OPTIONAL) 'Docker ps' to verify the status 
+- Run 'Energy_Consumption_sensors/Main.py' to start the KAFKA data transmission
+- Run on another terminal window 'Consumers/redis.consumer.py' to start collecting data with redis
+- ... (TO DO)
 
 RIMUOVERE PW ECC DAL DOCKER COMPOSE (?)
+FIXARE 'main.py' ---> REIMPOSTARE L'UPDATE TIMEs

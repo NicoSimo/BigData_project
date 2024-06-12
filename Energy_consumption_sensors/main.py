@@ -4,6 +4,7 @@ import schedule
 import time
 from pathlib import Path
 import sys
+import os
 
 # Get the path of the current file and resolve the project root directory to the sys.path
 current_file_path = Path(__file__)
@@ -36,8 +37,12 @@ def trigger_sensors():
     for thread in threads:
         thread.join()
 
+update_frequency = int(os.getenv('UPDATE_FREQUENCY', 10))
+
+print(update_frequency)
+
 # Schedule the job every 30 seconds 
-schedule.every(30).seconds.do(trigger_sensors) # In the real case scenario it would be every 3600 (60*60) seconds (1 hour).
+schedule.every(update_frequency).seconds.do(trigger_sensors) # In the real case scenario it would be every 3600 (60*60) seconds (1 hour).
 
 # Run the scheduler
 while True:

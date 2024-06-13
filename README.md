@@ -12,9 +12,9 @@ The docker-compose.yml file is used to set up the different containers used in t
 
 The dataset_prep.py prepares and organizes the data in folders that are then moved to a PostgreSQL container and are then used to populate the database.
 
-The repository '/Sensor_core/' contains the file 'sensor.py' which contains the 'Sensor class' used to build the structure of the sensors.
+The repository '/Sensor_core/' contains the file 'sensor_object.py' which contains the 'Sensor class' used to build the structure of the sensors.
 
-The repository '/Energy_consumption_sensor/' contains the 'main.py' file used to start Kafka by uploading the data from the '/absulute_path/Data/New_data/Sensors/new_consumptions.csv' file used to simulate the sensors retrieving the new data.
+The repository '/Energy_consumption_sensor/' contains the 'sensor_publisher.py' file used to start Kafka by uploading the data from the '/absulute_path/Data/New_data/Sensors/new_consumptions.csv' file used to simulate the sensors retrieving the new data.
 
 In the 'Consumers' repository, there are 2 different consumers. 
 The first one is the postgre_consumer, used to transfer the data on the PostgreSQL database to store the data. (TO DO)
@@ -37,5 +37,17 @@ To run the whole project you need (in order):
 - Run on another terminal window 'Consumers/redis.consumer.py' to start collecting data with redis
 - ... (TO DO)
 
+####################################################################################################################################
 RIMUOVERE PW ECC DAL DOCKER COMPOSE (?)
-FIXARE 'main.py' ---> REIMPOSTARE L'UPDATE TIMEs
+
+FIXARE 'main.py' ---> REIMPOSTARE L'UPDATE TIME
+
+Consumers/kafka_redis_consumer.py - Energy_consumption_sensors/sensor_scheduler.py - Main.py SONO DEI TEST PER ESEGUIRE TUTTO SIMULTANEAMENTE.
+
+FIXARE --> TEMPO DI AGGIORNAMENTO ERRATO 
+FIXATO --> SEMBREREBBE RICOMINCIARE QUANDO FINISCE IL FILE dei sensors.
+
+FIXED --> test.py SERVE A CAPIRE COSA SUCCEDE ALL'INTERNO DELLA GENERAZIONE DEI DATI
+           INVIATI POI COME SENSORI DA KAFKA.
+
+           test.py contiene una simulazione funzionante dell'invio dei dati. Ora vi è da implementare il meccanismo con Kafka.

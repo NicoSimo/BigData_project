@@ -57,4 +57,4 @@ for message in consumer:
     # In here instead of setting a TTL, we are using the LTRIM to keep the latest 5 entries. It is done to simulate the behaviour of the TTL while the code is still under change.
 
     # Optionally print the current list
-    print(f"Updated Redis list for {key}: {r.lrange(key, 0, -1)}")  
+    #print(f"Updated Redis list for {key}: {r.lrange(key, 0, -1)}")  

@@ -3,6 +3,7 @@ import dask
 import time
 import redis
 import json
+import os
 import pandas as pd
 
 # Initialize Dask client
@@ -52,12 +53,14 @@ if __name__ == "__main__":
     model = None
 
     # Update rate should match the SENSORS update rate (at /Energy_consumption_sensors/main.py)
-    update_rate = 30
+    # It is set to 30 seconds. But it should take the ENV variable set in the docker-compose file.
+    update_time = int(os.getenv('UPDATE_TIME', 30))
+
 
     while True:
         future = update_workflow()
         result = future.compute()
         print(result)
-        time.sleep(update_rate)  # Wait for the next cycle
+        time.sleep(update_time)  # Wait for the next cycle
 
     client.close()

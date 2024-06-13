@@ -5,3 +5,5 @@ numpy
 pandas
 dask
 distributed
+schedule
+kafka-python==2.0.2

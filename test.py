@@ -43,7 +43,6 @@ class Sensor:
 
 def run_sensor_scheduler(df):
     i = 0
-    print('Running def run_sensor_scheduler')
 
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     df.sort_values(by='timestamp', inplace=True)

@@ -51,3 +51,5 @@ FIXED --> test.py SERVE A CAPIRE COSA SUCCEDE ALL'INTERNO DELLA GENERAZIONE DEI 
            INVIATI POI COME SENSORI DA KAFKA.
 
            test.py contiene una simulazione funzionante dell'invio dei dati. Ora vi è da implementare il meccanismo con Kafka.
+
+FIX --> KAFKA PARTITIONS AND REPLICATION FACTOR

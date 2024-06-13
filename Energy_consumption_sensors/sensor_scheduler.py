@@ -28,6 +28,8 @@ def check_kafka_connectivity(kafka_host, kafka_port):
         return False
 
 def run_sensor_scheduler():
+    i = 0 # i is needed to iterate over the timestamps
+
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     df.sort_values(by='timestamp', inplace=True)
     data_read = df.copy()

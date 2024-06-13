@@ -16,7 +16,7 @@ sys.path.append(str(project_root))
 
 from Sensor_core.sensor_object import Sensor
 
-df = pd.read_csv('/Users/nicolosimonato/Desktop/UNITRENTO/BigDataTech/Data/New_data/Sensors/new_consumptions.csv')
+df = pd.read_csv('/app/new_data/Sensors/new_consumptions.csv')
 
 def check_kafka_connectivity(kafka_host, kafka_port):
     try:
@@ -28,11 +28,6 @@ def check_kafka_connectivity(kafka_host, kafka_port):
         return False
 
 def run_sensor_scheduler():
-    # Load and prepare the data
-    data_path = '/app/new_data/Sensors/new_consumptions.csv'
-    #print(f"Loading data from {data_path}")
-
-    df = pd.read_csv(data_path)
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     df.sort_values(by='timestamp', inplace=True)
     data_read = df.copy()

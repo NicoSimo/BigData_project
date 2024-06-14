@@ -18,14 +18,21 @@ from Sensor_core.sensor_object import Sensor
 
 df = pd.read_csv('/app/new_data/Sensors/new_consumptions.csv')
 
-def check_kafka_connectivity(kafka_host, kafka_port):
-    try:
-        with socket.create_connection((kafka_host, kafka_port), timeout=5) as sock:
-            print(f"Successfully connected to Kafka at {kafka_host}:{kafka_port}")
-            return True
-    except socket.error as err:
-        print(f"Failed to connect to Kafka at {kafka_host}:{kafka_port} - {err}")
-        return False
+def check_kafka_connectivity(kafka_brokers):
+    for broker in kafka_brokers:
+        print(f"Checking Kafka broker: {broker}")
+        if not broker:
+            continue
+        try:
+            kafka_host, kafka_port = broker.split(':')
+            with socket.create_connection((kafka_host, int(kafka_port)), timeout=5) as sock:
+                print(f"Successfully connected to Kafka at {kafka_host}:{kafka_port}")
+                return True
+        except socket.error as err:
+            print(f"Failed to connect to Kafka at {kafka_host}:{kafka_port} - {err}")
+        except ValueError as e:
+            print(f"Error parsing broker '{broker}': {e}")
+    return False
 
 def run_sensor_scheduler():
     i = 0 # i is needed to iterate over the timestamps
@@ -38,21 +45,17 @@ def run_sensor_scheduler():
     LAST_TIMESTAMP = data_read['timestamp'].iloc[-1]  # Last timestamp
 
     # Retry mechanism to wait for Kafka broker
-    kafka_broker = os.getenv('KAFKA_BROKER', 'kafka:9092')
-    #print(f"KAFKA_BROKER environment variable: {kafka_broker}")
+    kafka_brokers = os.getenv('KAFKA_BROKER', 'kafka1:9092,kafka2:9093,kafka3:9094,kafka4:9095').split(',')
+    print(f"KAFKA_BROKER environment variable: {kafka_brokers}")
     
-    kafka_host, kafka_port = kafka_broker.split(':')
-    kafka_port = int(kafka_port)
-    #print(f"Connecting to Kafka broker at: {kafka_broker}")
-
-    while not check_kafka_connectivity(kafka_host, kafka_port):
-        print("Kafka broker not available, retrying in 5 seconds...")
+    while not check_kafka_connectivity(kafka_brokers):
+        print("Kafka brokers not available, retrying in 5 seconds...")
         time.sleep(5)
 
     while True:
         try:
             # Ensuring the bootstrap_servers is correctly formatted
-            bootstrap_servers = [kafka_broker]
+            bootstrap_servers = kafka_brokers
             print(f"Bootstrap servers: {bootstrap_servers}, Type: {type(bootstrap_servers)}")
             
             producer = KafkaProducer(bootstrap_servers=bootstrap_servers)
@@ -103,4 +106,4 @@ def run_sensor_scheduler():
 
 if __name__ == '__main__':
     time.sleep(5) # Wait time before generating data
-    run_sensor_scheduler(df)
+    run_sensor_scheduler()

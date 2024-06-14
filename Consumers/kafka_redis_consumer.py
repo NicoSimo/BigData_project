@@ -5,11 +5,12 @@ import json
 import redis
 import os
 
-
 def run_kafka_redis_consumer():
     # Kafka setup
     topic_name = 'energy_consumption_topic'
-    kafka_broker = os.getenv('KAFKA_BROKER', 'kafka:9092')
+    kafka_brokers = os.getenv('KAFKA_BROKER', 'kafka1:9092,kafka2:9093,kafka3:9094,kafka4:9095').split(',')
+    print(f"KAFKA_BROKER environment variable: {kafka_brokers}")
+    
     redis_host = os.getenv('REDIS_HOST', 'redis')
     
     # Retry mechanism to wait for Kafka broker
@@ -17,13 +18,17 @@ def run_kafka_redis_consumer():
         try:
             consumer = KafkaConsumer(
                 topic_name, # The topic to consume messages from
-                bootstrap_servers=[kafka_broker], # The Kafka cluster's address
+                bootstrap_servers=kafka_brokers, # The Kafka cluster's address
                 auto_offset_reset='earliest', 
-                group_id='redis-group' # The consumer group ID
+                group_id='energy_consumption' # The consumer group ID
             )
+            print("KafkaConsumer created successfully.")
             break
         except NoBrokersAvailable:
             print("Kafka broker not available, retrying in 5 seconds...")
+            time.sleep(5)
+        except Exception as e:
+            print(f"Unexpected error during KafkaConsumer initialization: {e}")
             time.sleep(5)
 
     # Redis connection setup
@@ -56,7 +61,7 @@ def run_kafka_redis_consumer():
         # LRANGE: Retrieves the latest 5 entries from the list at key. This operation is optional and can be used for debugging purposes.
         
         r.lpush(key, measurement)
-        r.ltrim(key, 0, 4)  # Keeps the latest 5 entries in the list (0-4) -----> 5 elements needs to be aligned with the TTL.
+        #r.ltrim(key, 0, 4)  # Keeps the latest 5 entries in the list (0-4) -----> 5 elements needs to be aligned with the TTL.
         # In here instead of setting a TTL, we are using the LTRIM to keep the latest 5 entries. It is done to simulate the behaviour of the TTL while the code is still under change.
 
         # Optionally print the current list

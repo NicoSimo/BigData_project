@@ -74,7 +74,7 @@ services:
       - UPDATE_TIME = 60 # Time in seconds used to send the data through kafka and to update the data in redis.
     volumes:
       - main-app-data:/app/data # A named volume for application data.
-      - /Users/nicolosimonato/Desktop/UNITRENTO/BigDataTech/Data/New_data:/app/new_data # A bind mount for local data files to move the data from local host to container.
+      - ${LOCAL_DATA_PATH}:/app/new_data # A bind mount for local data files to move the data from local host to container.
       - .:/app/
 
     # Connects the service to both backend and frontend networks.

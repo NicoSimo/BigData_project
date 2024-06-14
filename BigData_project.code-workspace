@@ -1,13 +1,16 @@
 {
 	"folders": [
 		{
+			"name": "BigData_project",
 			"path": "."
 		},
 		{
-			"path": "../../../dataset_energyconsumption"
+			"name": "Data",
+			"path": "../Data"
 		},
 		{
-			"path": "../Data"
+			"name": "dataset_energyconsumption",
+			"path": "../../../dataset_energyconsumption"
 		}
 	],
 	"settings": {}

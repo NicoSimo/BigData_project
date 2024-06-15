@@ -11,41 +11,21 @@ class Sensor:
         self.building_id = building_id
         self.topic = topic
         self.data = data
+        self.producer = producer  # Use the passed producer directly
 
         # Logging the producer initialization details
-        log.info(f"Initializing KafkaProducer for building_id: {building_id}")
-        log.info(f"Bootstrap servers: {producer.config['bootstrap_servers']}")
-
-        # Initialize Kafka producer
-        self.producer = KafkaProducer(
-            bootstrap_servers=producer.config['bootstrap_servers'],
-            value_serializer=lambda v: json.dumps(v, default=self.json_serializer).encode('utf-8')
-        )
-
-    def json_serializer(self, obj):
-        """
-        JSON serializer for objects not serializable by default.
-        """
-        if isinstance(obj, pd.Timestamp):
-            return obj.isoformat()
-        if isinstance(obj, np.integer):
-            return int(obj)
-        if isinstance(obj, np.floating):
-            return float(obj)
-        if isinstance(obj, np.ndarray):
-            return obj.tolist()
-        raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
+        log.info(f"Sensor initialized for building_id: {building_id} using topic: {topic}")
 
     def send_data(self):
         for _, row in self.data.iterrows():
             message = {
-                'building_id': int(self.building_id),  # Ensure building_id is an int
-                'timestamp': row['timestamp'].isoformat(),  # Ensure timestamp is ISO formatted
-                'meter_reading': float(row['meter_reading'])  # Ensure meter_reading is a float
+                'building_id': int(self.building_id),
+                'timestamp': row['timestamp'].isoformat(),
+                'meter_reading': float(row['meter_reading'])
             }
             try:
                 self.producer.send(self.topic, value=message)
                 self.producer.flush()
-                log.info(f"Sent message to broker {self.producer.config['bootstrap_servers']} for building_id {self.building_id}: {message}")
+                log.info(f"Sent message: {message}")
             except Exception as e:
                 log.error(f"Failed to send message for building_id {self.building_id}: {e}")

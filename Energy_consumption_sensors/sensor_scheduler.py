@@ -7,6 +7,7 @@ import sys
 import os
 from kafka import KafkaProducer
 from kafka.errors import NoBrokersAvailable
+import json
 import socket
 import logging
 
@@ -46,7 +47,8 @@ def assign_broker_to_site(site_id, site_to_broker):
     return site_to_broker[site_id]
 
 def run_sensor_scheduler():
-    i = 0  # i is needed to iterate over the timestamps
+    
+    i = 0
 
     df_measurements['timestamp'] = pd.to_datetime(df_measurements['timestamp'])
     df_measurements.sort_values(by='timestamp', inplace=True)
@@ -55,7 +57,6 @@ def run_sensor_scheduler():
     INITIAL_TIMESTAMP = data_read['timestamp'].iloc[0]  # Use .iloc[0] to get the first timestamp
     LAST_TIMESTAMP = data_read['timestamp'].iloc[-1]  # Last timestamp
 
-    # Retry mechanism to wait for Kafka broker
     global kafka_brokers
     kafka_brokers = os.getenv('KAFKA_BROKER', 'kafka1:9092,kafka2:9093,kafka3:9094,kafka4:9095').split(',')
     log.info(f"KAFKA_BROKER environment variable: {kafka_brokers}")
@@ -66,17 +67,15 @@ def run_sensor_scheduler():
 
     producers = {}
     for broker in kafka_brokers:
-        while True:
-            try:
-                producers[broker] = KafkaProducer(bootstrap_servers=[broker])
-                log.info(f"KafkaProducer created successfully for broker {broker}.")
-                break
-            except NoBrokersAvailable:
-                log.warning(f"Kafka broker {broker} not available, retrying in 5 seconds...")
-                time.sleep(5)
-            except Exception as e:
-                log.error(f"Unexpected error during KafkaProducer initialization for broker {broker}: {e}")
-                break
+        try:
+            producers[broker] = KafkaProducer(
+                bootstrap_servers=[broker],
+                value_serializer=lambda v: json.dumps(v).encode('utf-8')
+            )
+            log.info(f"KafkaProducer created successfully for broker {broker}.")
+        except Exception as e:
+            log.error(f"Error initializing KafkaProducer for broker {broker}: {e}")
+            continue  
 
     # Map site_id to brokers
     site_to_broker = {}

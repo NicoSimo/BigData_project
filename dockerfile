@@ -20,4 +20,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Set the entry point to run the main.py script
-CMD ["python", "main.py"]
+CMD ["python", "test_main.py"]

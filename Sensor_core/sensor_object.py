@@ -2,6 +2,9 @@ from kafka import KafkaProducer
 import json
 import pandas as pd
 import numpy as np
+import logging
+
+log = logging.getLogger(__name__)
 
 class Sensor:
     def __init__(self, building_id, topic, data, producer):
@@ -10,8 +13,8 @@ class Sensor:
         self.data = data
 
         # Logging the producer initialization details
-        print(f"Initializing KafkaProducer for building_id: {building_id}")
-        print(f"Bootstrap servers: {producer.config['bootstrap_servers']}, Type: {type(producer.config['bootstrap_servers'])}")
+        log.info(f"Initializing KafkaProducer for building_id: {building_id}")
+        log.info(f"Bootstrap servers: {producer.config['bootstrap_servers']}")
 
         # Initialize Kafka producer
         self.producer = KafkaProducer(
@@ -40,6 +43,9 @@ class Sensor:
                 'timestamp': row['timestamp'].isoformat(),  # Ensure timestamp is ISO formatted
                 'meter_reading': float(row['meter_reading'])  # Ensure meter_reading is a float
             }
-            #print(f"Sending message: {message}")
-            self.producer.send(self.topic, value=message)
-            self.producer.flush()
+            try:
+                self.producer.send(self.topic, value=message)
+                self.producer.flush()
+                log.info(f"Sent message to broker {self.producer.config['bootstrap_servers']} for building_id {self.building_id}: {message}")
+            except Exception as e:
+                log.error(f"Failed to send message for building_id {self.building_id}: {e}")

@@ -4,13 +4,18 @@ import time
 import json
 import redis
 import os
+import logging
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
+
 
 def run_kafka_redis_consumer():
     # Kafka setup
     topic_name = 'energy_consumption_topic'
     kafka_brokers = os.getenv('KAFKA_BROKER', 'kafka1:9092,kafka2:9093,kafka3:9094,kafka4:9095').split(',')
-    print(f"KAFKA_BROKER environment variable: {kafka_brokers}")
-    
+
+    # Redis setup
     redis_host = os.getenv('REDIS_HOST', 'redis')
     
     # Retry mechanism to wait for Kafka broker
@@ -22,13 +27,14 @@ def run_kafka_redis_consumer():
                 auto_offset_reset='earliest', 
                 group_id='energy_consumption' # The consumer group ID
             )
-            print("KafkaConsumer created successfully.")
             break
+
         except NoBrokersAvailable:
-            print("Kafka broker not available, retrying in 5 seconds...")
+            log.warning("Kafka broker not available, retrying in 5 seconds...")
             time.sleep(5)
+
         except Exception as e:
-            print(f"Unexpected error during KafkaConsumer initialization: {e}")
+            log.error(f"Unexpected error during KafkaConsumer initialization: {e}")
             time.sleep(5)
 
     # Redis connection setup

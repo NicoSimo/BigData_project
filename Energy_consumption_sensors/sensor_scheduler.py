@@ -8,6 +8,10 @@ import os
 from kafka import KafkaProducer
 from kafka.errors import NoBrokersAvailable
 import socket
+import logging
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
 
 # Get the path of the current file and resolve the project root directory to the sys.path
 current_file_path = Path(__file__)
@@ -16,60 +20,73 @@ sys.path.append(str(project_root))
 
 from Sensor_core.sensor_object import Sensor
 
-df = pd.read_csv('/app/new_data/Sensors/new_consumptions.csv')
+df_measurements = pd.read_csv('/app/new_data/Sensors/new_consumptions.csv')
+df_sensors = pd.read_csv('/app/new_data/building_data.csv')
 
 def check_kafka_connectivity(kafka_brokers):
     for broker in kafka_brokers:
-        print(f"Checking Kafka broker: {broker}")
+        log.info(f"Checking Kafka broker: {broker}")
         if not broker:
             continue
         try:
             kafka_host, kafka_port = broker.split(':')
             with socket.create_connection((kafka_host, int(kafka_port)), timeout=5) as sock:
-                print(f"Successfully connected to Kafka at {kafka_host}:{kafka_port}")
+                log.info(f"Successfully connected to Kafka at {kafka_host}:{kafka_port}")
                 return True
         except socket.error as err:
-            print(f"Failed to connect to Kafka at {kafka_host}:{kafka_port} - {err}")
+            log.warning(f"Failed to connect to Kafka at {kafka_host}:{kafka_port} - {err}")
         except ValueError as e:
-            print(f"Error parsing broker '{broker}': {e}")
+            log.error(f"Error parsing broker '{broker}': {e}")
     return False
 
-def run_sensor_scheduler():
-    i = 0 # i is needed to iterate over the timestamps
+def assign_broker_to_site(site_id, site_to_broker):
+    if site_id not in site_to_broker:
+        broker_index = len(site_to_broker) % len(kafka_brokers)
+        site_to_broker[site_id] = kafka_brokers[broker_index]
+    return site_to_broker[site_id]
 
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
-    df.sort_values(by='timestamp', inplace=True)
-    data_read = df.copy()
+def run_sensor_scheduler():
+    i = 0  # i is needed to iterate over the timestamps
+
+    df_measurements['timestamp'] = pd.to_datetime(df_measurements['timestamp'])
+    df_measurements.sort_values(by='timestamp', inplace=True)
+    data_read = df_measurements.copy()
 
     INITIAL_TIMESTAMP = data_read['timestamp'].iloc[0]  # Use .iloc[0] to get the first timestamp
     LAST_TIMESTAMP = data_read['timestamp'].iloc[-1]  # Last timestamp
 
     # Retry mechanism to wait for Kafka broker
+    global kafka_brokers
     kafka_brokers = os.getenv('KAFKA_BROKER', 'kafka1:9092,kafka2:9093,kafka3:9094,kafka4:9095').split(',')
-    print(f"KAFKA_BROKER environment variable: {kafka_brokers}")
-    
+    log.info(f"KAFKA_BROKER environment variable: {kafka_brokers}")
+
     while not check_kafka_connectivity(kafka_brokers):
-        print("Kafka brokers not available, retrying in 5 seconds...")
+        log.warning("Kafka brokers not available, retrying in 5 seconds...")
         time.sleep(5)
 
-    while True:
-        try:
-            # Ensuring the bootstrap_servers is correctly formatted
-            bootstrap_servers = kafka_brokers
-            print(f"Bootstrap servers: {bootstrap_servers}, Type: {type(bootstrap_servers)}")
-            
-            producer = KafkaProducer(bootstrap_servers=bootstrap_servers)
-            print("KafkaProducer created successfully.")
-            break
-        except NoBrokersAvailable:
-            print("Kafka broker not available, retrying in 5 seconds...")
-            time.sleep(5)
-        except Exception as e:
-            print(f"Unexpected error during KafkaProducer initialization: {e}")
-            break
+    producers = {}
+    for broker in kafka_brokers:
+        while True:
+            try:
+                producers[broker] = KafkaProducer(bootstrap_servers=[broker])
+                log.info(f"KafkaProducer created successfully for broker {broker}.")
+                break
+            except NoBrokersAvailable:
+                log.warning(f"Kafka broker {broker} not available, retrying in 5 seconds...")
+                time.sleep(5)
+            except Exception as e:
+                log.error(f"Unexpected error during KafkaProducer initialization for broker {broker}: {e}")
+                break
 
-    # Create sensor instances
-    sensors = [Sensor(building_id, 'energy_consumption_topic', df[df['building_id'] == building_id], producer) for building_id in df['building_id'].unique()]
+    # Map site_id to brokers
+    site_to_broker = {}
+    sensors = []
+    for _, sensor in df_sensors.iterrows():
+        broker = assign_broker_to_site(sensor['site_id'], site_to_broker)
+        producer = producers[broker]
+        building_id = sensor['building_id']
+        sensor_data = df_measurements[df_measurements['building_id'] == building_id]
+        sensors.append(Sensor(building_id, 'energy_consumption_topic', sensor_data, producer))
 
     # This function alone updates data only ONCE. To increase the frequency of update set by the scheduler.every() function.
     def trigger_sensors():
@@ -97,7 +114,7 @@ def run_sensor_scheduler():
         for sensor in sensors:
             sensor.data = data_read_current[data_read_current['building_id'] == sensor.building_id]
         
-        if timestamp > LAST_TIMESTAMP: # if timestamp is greater than the last timestamp, break the loop
+        if timestamp > LAST_TIMESTAMP:  # if timestamp is greater than the last timestamp, break the loop
             break
 
         trigger_sensors()
@@ -105,5 +122,5 @@ def run_sensor_scheduler():
         time.sleep(update_time)
 
 if __name__ == '__main__':
-    time.sleep(5) # Wait time before generating data
+    time.sleep(5)  # Wait time before generating data
     run_sensor_scheduler()

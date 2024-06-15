@@ -1,5 +1,5 @@
 import threading
-import Consumers.kafka_redis_consumer as kafka_redis_consumer
+import Consumers.redis_consumer as redis_consumer
 import Energy_consumption_sensors.sensor_scheduler as sensor_scheduler
 
 def run_all():
@@ -8,7 +8,7 @@ def run_all():
     sensor_thread.start()
 
     # Start Kafka to Redis consumer
-    kafka_redis_thread = threading.Thread(target=kafka_redis_consumer.run_kafka_redis_consumer)
+    kafka_redis_thread = threading.Thread(target=redis_consumer.run_redis_consumer)
     kafka_redis_thread.start()
 
     # Join threads to wait for their completion

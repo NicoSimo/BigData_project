@@ -24,7 +24,7 @@ Added Data_fetching/dask_fetch.py, planning of using DASK to retrieve the data f
 
 Moving all the python scripts in a dedicated container. (TO DO) --> NEED TO MODIFY THE dockerfile
 
-
+The info such as DB names, pw, user are in the .env file. The file is uploaded given the educational goal of the project. 
 
 To run the whole project you need (in order):
 

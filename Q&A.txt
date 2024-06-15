@@ -5,3 +5,7 @@ DOCKER ---> Multi-container (1 per each app) or 1 container with all the apps?
 MICRO / MACRO level --> MICRO single sensor / MACRO the aggregation of more sensors?
 
 Long term or Short term forecasting predictions?
+
+DB Keys ?
+
+Number of Brokers ?

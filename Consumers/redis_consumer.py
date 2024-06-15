@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 
-def run_kafka_redis_consumer():
+def run_redis_consumer():
     # Kafka setup
     topic_name = 'energy_consumption_topic'
     kafka_brokers = os.getenv('KAFKA_BROKER', 'kafka1:9092,kafka2:9093,kafka3:9094,kafka4:9095').split(',')
@@ -74,4 +74,4 @@ def run_kafka_redis_consumer():
         # print(f"Updated Redis list for {key}: {r.lrange(key, 0, -1)}")
 
 if __name__ == '__main__':
-    run_kafka_redis_consumer()
+    run_redis_consumer()

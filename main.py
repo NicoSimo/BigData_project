@@ -1,6 +1,7 @@
 import threading
 import Consumers.redis_consumer as redis_consumer
 import Energy_consumption_sensors.sensor_scheduler as sensor_scheduler
+import Predictor.prevision_processing as prevision_processing
 
 def run_all():
     # Start sensor scheduler
@@ -11,9 +12,14 @@ def run_all():
     kafka_redis_thread = threading.Thread(target=redis_consumer.run_redis_consumer)
     kafka_redis_thread.start()
 
+    #Start Redis to Kafka consumer
+    processor_thread = threading.Thread(target=prevision_processing.subscribe_and_process)
+    processor_thread.start()
+
     # Join threads to wait for their completion
-    sensor_thread.join()
-    kafka_redis_thread.join()
+    #sensor_thread.join()
+    #kafka_redis_thread.join()
+    processor_thread.join()
 
 if __name__ == '__main__':
     run_all()

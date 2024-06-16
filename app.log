@@ -1,0 +1,352 @@
+2024-06-16 12:34:07,633 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 12:34:07,740 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 12:34:07,847 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 12:34:07,953 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 12:34:23,666 - WARNING - Kafka broker kafka1:9092 not available, retrying in 5 seconds...
+2024-06-16 12:34:28,718 - WARNING - Kafka broker kafka1:9092 not available, retrying in 5 seconds...
+2024-06-16 12:34:33,774 - WARNING - Kafka broker kafka1:9092 not available, retrying in 5 seconds...
+2024-06-16 12:34:38,921 - WARNING - Kafka broker kafka1:9092 not available, retrying in 5 seconds...
+2024-06-16 12:34:44,039 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 12:34:44,151 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 12:34:44,262 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 12:34:44,373 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 12:47:26,867 - WARNING - Kafka broker kafka1:9092 not available, retrying in 5 seconds...
+2024-06-16 12:47:31,980 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 12:47:32,086 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 12:47:32,193 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 12:47:32,302 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 12:49:49,352 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 12:49:49,458 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 12:49:49,565 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 12:49:49,672 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 12:56:41,662 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 12:56:41,770 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 12:56:41,877 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 12:56:41,984 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:02:04,115 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:02:04,224 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:02:04,332 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:02:04,440 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:05:59,416 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:05:59,524 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:05:59,632 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:05:59,741 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:08:14,776 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:08:14,883 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:08:14,990 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:08:15,097 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:12:54,769 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:12:54,877 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:12:54,984 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:12:55,091 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:12:55,100 - INFO - I have read the redis information!!
+2024-06-16 13:20:46,870 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:20:46,979 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:20:47,085 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:20:47,192 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:20:47,201 - INFO - Subscribed to Redis events.
+2024-06-16 13:29:33,645 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:29:33,753 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:29:33,861 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:29:33,968 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:29:33,977 - INFO - Subscribed to Redis events.
+2024-06-16 13:31:33,038 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:31:33,145 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:31:33,252 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:31:33,359 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:31:33,369 - INFO - Subscribed to Redis events.
+2024-06-16 13:35:44,479 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:35:44,586 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:35:44,693 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:35:44,800 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:35:44,808 - INFO - Subscribed to Redis events.
+2024-06-16 13:35:44,809 - INFO - {'type': 'psubscribe', 'pattern': None, 'channel': b'__keyevent@0__:set', 'data': 1}
+2024-06-16 13:37:50,177 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:37:50,285 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:37:50,392 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:37:50,499 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:37:50,508 - INFO - Subscribed to Redis events.
+2024-06-16 13:37:50,508 - INFO - {'type': 'psubscribe', 'pattern': None, 'channel': b'__keyevent@0__:set', 'data': 1}
+2024-06-16 13:39:28,663 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:39:28,771 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:39:28,878 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:39:28,985 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:39:28,994 - INFO - Subscribed to Redis events.
+2024-06-16 13:39:28,995 - INFO - {'type': 'psubscribe', 'pattern': None, 'channel': b'__keyevent@0__:set', 'data': 1}
+2024-06-16 13:47:59,715 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:47:59,822 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:47:59,929 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:48:00,036 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:48:00,046 - INFO - Subscribed to Redis events.
+2024-06-16 13:48:00,046 - INFO - {'type': 'psubscribe', 'pattern': None, 'channel': b'__keyevent@0__:set', 'data': 1}
+2024-06-16 13:52:56,824 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 13:52:56,932 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 13:52:57,038 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 13:52:57,146 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 13:52:57,155 - INFO - Subscribed to Redis events.
+2024-06-16 13:52:57,155 - INFO - {'type': 'psubscribe', 'pattern': None, 'channel': b'__keyevent@0__:set', 'data': 1}
+2024-06-16 14:22:02,045 - WARNING - Kafka broker kafka1:9092 not available, retrying in 5 seconds...
+2024-06-16 14:22:07,159 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 14:22:07,266 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 14:22:07,372 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 14:22:07,479 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 14:33:06,438 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 14:33:06,546 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 14:33:06,653 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 14:33:06,760 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 14:33:06,769 - INFO - Subscribed to Redis events.
+2024-06-16 14:38:22,162 - INFO - KafkaProducer created successfully for broker kafka1:9092.
+2024-06-16 14:38:22,269 - INFO - KafkaProducer created successfully for broker kafka2:9093.
+2024-06-16 14:38:22,376 - INFO - KafkaProducer created successfully for broker kafka3:9094.
+2024-06-16 14:38:22,483 - INFO - KafkaProducer created successfully for broker kafka4:9095.
+2024-06-16 14:38:22,491 - INFO - Subscribed to Redis channel "prova".
+2024-06-16 14:38:25,702 - INFO - Received message from Redis: {"building": 45, "timestamp": "2016-09-02T00:00:00", "meter_reading": 4.812}
+2024-06-16 14:38:25,904 - INFO - Sent to Kafka topic energy_consumption: {"building": 45, "timestamp": "2016-09-02T00:00:00", "meter_reading": 4.812}
+2024-06-16 14:38:25,958 - INFO - Sent to Kafka topic energy_consumption: {"building": 45, "timestamp": "2016-09-02T00:00:00", "meter_reading": 4.812}
+2024-06-16 14:38:26,013 - INFO - Sent to Kafka topic energy_consumption: {"building": 45, "timestamp": "2016-09-02T00:00:00", "meter_reading": 4.812}
+2024-06-16 14:38:26,067 - INFO - Sent to Kafka topic energy_consumption: {"building": 45, "timestamp": "2016-09-02T00:00:00", "meter_reading": 4.812}
+2024-06-16 14:38:26,067 - INFO - Received message from Redis: {"building": 39, "timestamp": "2016-09-02T00:00:00", "meter_reading": 308.176}
+2024-06-16 14:38:26,069 - INFO - Sent to Kafka topic energy_consumption: {"building": 39, "timestamp": "2016-09-02T00:00:00", "meter_reading": 308.176}
+2024-06-16 14:38:26,070 - INFO - Sent to Kafka topic energy_consumption: {"building": 39, "timestamp": "2016-09-02T00:00:00", "meter_reading": 308.176}
+2024-06-16 14:38:26,071 - INFO - Sent to Kafka topic energy_consumption: {"building": 39, "timestamp": "2016-09-02T00:00:00", "meter_reading": 308.176}
+2024-06-16 14:38:26,072 - INFO - Sent to Kafka topic energy_consumption: {"building": 39, "timestamp": "2016-09-02T00:00:00", "meter_reading": 308.176}
+2024-06-16 14:38:26,072 - INFO - Received message from Redis: {"building": 56, "timestamp": "2016-09-02T00:00:00", "meter_reading": 279.85}
+2024-06-16 14:38:26,074 - INFO - Sent to Kafka topic energy_consumption: {"building": 56, "timestamp": "2016-09-02T00:00:00", "meter_reading": 279.85}
+2024-06-16 14:38:26,075 - INFO - Sent to Kafka topic energy_consumption: {"building": 56, "timestamp": "2016-09-02T00:00:00", "meter_reading": 279.85}
+2024-06-16 14:38:26,076 - INFO - Sent to Kafka topic energy_consumption: {"building": 56, "timestamp": "2016-09-02T00:00:00", "meter_reading": 279.85}
+2024-06-16 14:38:26,077 - INFO - Sent to Kafka topic energy_consumption: {"building": 56, "timestamp": "2016-09-02T00:00:00", "meter_reading": 279.85}
+2024-06-16 14:38:26,078 - INFO - Received message from Redis: {"building": 75, "timestamp": "2016-09-02T00:00:00", "meter_reading": 185.656}
+2024-06-16 14:38:26,079 - INFO - Sent to Kafka topic energy_consumption: {"building": 75, "timestamp": "2016-09-02T00:00:00", "meter_reading": 185.656}
+2024-06-16 14:38:26,080 - INFO - Sent to Kafka topic energy_consumption: {"building": 75, "timestamp": "2016-09-02T00:00:00", "meter_reading": 185.656}
+2024-06-16 14:38:26,081 - INFO - Sent to Kafka topic energy_consumption: {"building": 75, "timestamp": "2016-09-02T00:00:00", "meter_reading": 185.656}
+2024-06-16 14:38:26,082 - INFO - Sent to Kafka topic energy_consumption: {"building": 75, "timestamp": "2016-09-02T00:00:00", "meter_reading": 185.656}
+2024-06-16 14:38:26,082 - INFO - Received message from Redis: {"building": 82, "timestamp": "2016-09-02T00:00:00", "meter_reading": 49.5539}
+2024-06-16 14:38:26,084 - INFO - Sent to Kafka topic energy_consumption: {"building": 82, "timestamp": "2016-09-02T00:00:00", "meter_reading": 49.5539}
+2024-06-16 14:38:26,085 - INFO - Sent to Kafka topic energy_consumption: {"building": 82, "timestamp": "2016-09-02T00:00:00", "meter_reading": 49.5539}
+2024-06-16 14:38:26,086 - INFO - Sent to Kafka topic energy_consumption: {"building": 82, "timestamp": "2016-09-02T00:00:00", "meter_reading": 49.5539}
+2024-06-16 14:38:26,088 - INFO - Sent to Kafka topic energy_consumption: {"building": 82, "timestamp": "2016-09-02T00:00:00", "meter_reading": 49.5539}
+2024-06-16 14:38:26,088 - INFO - Received message from Redis: {"building": 124, "timestamp": "2016-09-02T00:00:00", "meter_reading": 23.7}
+2024-06-16 14:38:26,089 - INFO - Sent to Kafka topic energy_consumption: {"building": 124, "timestamp": "2016-09-02T00:00:00", "meter_reading": 23.7}
+2024-06-16 14:38:26,090 - INFO - Sent to Kafka topic energy_consumption: {"building": 124, "timestamp": "2016-09-02T00:00:00", "meter_reading": 23.7}
+2024-06-16 14:38:26,091 - INFO - Sent to Kafka topic energy_consumption: {"building": 124, "timestamp": "2016-09-02T00:00:00", "meter_reading": 23.7}
+2024-06-16 14:38:26,092 - INFO - Sent to Kafka topic energy_consumption: {"building": 124, "timestamp": "2016-09-02T00:00:00", "meter_reading": 23.7}
+2024-06-16 14:38:26,093 - INFO - Received message from Redis: {"building": 77, "timestamp": "2016-09-02T00:00:00", "meter_reading": 127.775}
+2024-06-16 14:38:26,094 - INFO - Sent to Kafka topic energy_consumption: {"building": 77, "timestamp": "2016-09-02T00:00:00", "meter_reading": 127.775}
+2024-06-16 14:38:26,095 - INFO - Sent to Kafka topic energy_consumption: {"building": 77, "timestamp": "2016-09-02T00:00:00", "meter_reading": 127.775}
+2024-06-16 14:38:26,096 - INFO - Sent to Kafka topic energy_consumption: {"building": 77, "timestamp": "2016-09-02T00:00:00", "meter_reading": 127.775}
+2024-06-16 14:38:26,098 - INFO - Sent to Kafka topic energy_consumption: {"building": 77, "timestamp": "2016-09-02T00:00:00", "meter_reading": 127.775}
+2024-06-16 14:38:26,098 - INFO - Received message from Redis: {"building": 114, "timestamp": "2016-09-02T00:00:00", "meter_reading": 792.8330000000001}
+2024-06-16 14:38:26,099 - INFO - Sent to Kafka topic energy_consumption: {"building": 114, "timestamp": "2016-09-02T00:00:00", "meter_reading": 792.8330000000001}
+2024-06-16 14:38:26,100 - INFO - Sent to Kafka topic energy_consumption: {"building": 114, "timestamp": "2016-09-02T00:00:00", "meter_reading": 792.8330000000001}
+2024-06-16 14:38:26,102 - INFO - Sent to Kafka topic energy_consumption: {"building": 114, "timestamp": "2016-09-02T00:00:00", "meter_reading": 792.8330000000001}
+2024-06-16 14:38:26,103 - INFO - Sent to Kafka topic energy_consumption: {"building": 114, "timestamp": "2016-09-02T00:00:00", "meter_reading": 792.8330000000001}
+2024-06-16 14:38:26,103 - INFO - Received message from Redis: {"building": 152, "timestamp": "2016-09-02T00:00:00", "meter_reading": 8.6977}
+2024-06-16 14:38:26,104 - INFO - Sent to Kafka topic energy_consumption: {"building": 152, "timestamp": "2016-09-02T00:00:00", "meter_reading": 8.6977}
+2024-06-16 14:38:26,105 - INFO - Sent to Kafka topic energy_consumption: {"building": 152, "timestamp": "2016-09-02T00:00:00", "meter_reading": 8.6977}
+2024-06-16 14:38:26,106 - INFO - Sent to Kafka topic energy_consumption: {"building": 152, "timestamp": "2016-09-02T00:00:00", "meter_reading": 8.6977}
+2024-06-16 14:38:26,108 - INFO - Sent to Kafka topic energy_consumption: {"building": 152, "timestamp": "2016-09-02T00:00:00", "meter_reading": 8.6977}
+2024-06-16 14:38:26,108 - INFO - Received message from Redis: {"building": 110, "timestamp": "2016-09-02T00:00:00", "meter_reading": 313.333}
+2024-06-16 14:38:26,109 - INFO - Sent to Kafka topic energy_consumption: {"building": 110, "timestamp": "2016-09-02T00:00:00", "meter_reading": 313.333}
+2024-06-16 14:38:26,110 - INFO - Sent to Kafka topic energy_consumption: {"building": 110, "timestamp": "2016-09-02T00:00:00", "meter_reading": 313.333}
+2024-06-16 14:38:26,111 - INFO - Sent to Kafka topic energy_consumption: {"building": 110, "timestamp": "2016-09-02T00:00:00", "meter_reading": 313.333}
+2024-06-16 14:38:26,112 - INFO - Sent to Kafka topic energy_consumption: {"building": 110, "timestamp": "2016-09-02T00:00:00", "meter_reading": 313.333}
+2024-06-16 14:38:26,112 - INFO - Received message from Redis: {"building": 683, "timestamp": "2016-09-02T00:00:00", "meter_reading": 1.4}
+2024-06-16 14:38:26,113 - INFO - Sent to Kafka topic energy_consumption: {"building": 683, "timestamp": "2016-09-02T00:00:00", "meter_reading": 1.4}
+2024-06-16 14:38:26,115 - INFO - Sent to Kafka topic energy_consumption: {"building": 683, "timestamp": "2016-09-02T00:00:00", "meter_reading": 1.4}
+2024-06-16 14:38:26,116 - INFO - Sent to Kafka topic energy_consumption: {"building": 683, "timestamp": "2016-09-02T00:00:00", "meter_reading": 1.4}
+2024-06-16 14:38:26,117 - INFO - Sent to Kafka topic energy_consumption: {"building": 683, "timestamp": "2016-09-02T00:00:00", "meter_reading": 1.4}
+2024-06-16 14:38:26,117 - INFO - Received message from Redis: {"building": 675, "timestamp": "2016-09-02T00:00:00", "meter_reading": 40.5}
+2024-06-16 14:38:26,118 - INFO - Sent to Kafka topic energy_consumption: {"building": 675, "timestamp": "2016-09-02T00:00:00", "meter_reading": 40.5}
+2024-06-16 14:38:26,119 - INFO - Sent to Kafka topic energy_consumption: {"building": 675, "timestamp": "2016-09-02T00:00:00", "meter_reading": 40.5}
+2024-06-16 14:38:26,120 - INFO - Sent to Kafka topic energy_consumption: {"building": 675, "timestamp": "2016-09-02T00:00:00", "meter_reading": 40.5}
+2024-06-16 14:38:26,121 - INFO - Sent to Kafka topic energy_consumption: {"building": 675, "timestamp": "2016-09-02T00:00:00", "meter_reading": 40.5}
+2024-06-16 14:38:26,121 - INFO - Received message from Redis: {"building": 702, "timestamp": "2016-09-02T00:00:00", "meter_reading": 9.6}
+2024-06-16 14:38:26,123 - INFO - Sent to Kafka topic energy_consumption: {"building": 702, "timestamp": "2016-09-02T00:00:00", "meter_reading": 9.6}
+2024-06-16 14:38:26,124 - INFO - Sent to Kafka topic energy_consumption: {"building": 702, "timestamp": "2016-09-02T00:00:00", "meter_reading": 9.6}
+2024-06-16 14:38:26,125 - INFO - Sent to Kafka topic energy_consumption: {"building": 702, "timestamp": "2016-09-02T00:00:00", "meter_reading": 9.6}
+2024-06-16 14:38:26,126 - INFO - Sent to Kafka topic energy_consumption: {"building": 702, "timestamp": "2016-09-02T00:00:00", "meter_reading": 9.6}
+2024-06-16 14:38:26,126 - INFO - Received message from Redis: {"building": 724, "timestamp": "2016-09-02T00:00:00", "meter_reading": 14.7}
+2024-06-16 14:38:26,128 - INFO - Sent to Kafka topic energy_consumption: {"building": 724, "timestamp": "2016-09-02T00:00:00", "meter_reading": 14.7}
+2024-06-16 14:38:26,129 - INFO - Sent to Kafka topic energy_consumption: {"building": 724, "timestamp": "2016-09-02T00:00:00", "meter_reading": 14.7}
+2024-06-16 14:38:26,130 - INFO - Sent to Kafka topic energy_consumption: {"building": 724, "timestamp": "2016-09-02T00:00:00", "meter_reading": 14.7}
+2024-06-16 14:38:26,131 - INFO - Sent to Kafka topic energy_consumption: {"building": 724, "timestamp": "2016-09-02T00:00:00", "meter_reading": 14.7}
+2024-06-16 14:38:26,131 - INFO - Received message from Redis: {"building": 1245, "timestamp": "2016-09-02T00:00:00", "meter_reading": 64.1875}
+2024-06-16 14:38:26,132 - INFO - Sent to Kafka topic energy_consumption: {"building": 1245, "timestamp": "2016-09-02T00:00:00", "meter_reading": 64.1875}
+2024-06-16 14:38:26,133 - INFO - Sent to Kafka topic energy_consumption: {"building": 1245, "timestamp": "2016-09-02T00:00:00", "meter_reading": 64.1875}
+2024-06-16 14:38:26,135 - INFO - Sent to Kafka topic energy_consumption: {"building": 1245, "timestamp": "2016-09-02T00:00:00", "meter_reading": 64.1875}
+2024-06-16 14:38:26,136 - INFO - Sent to Kafka topic energy_consumption: {"building": 1245, "timestamp": "2016-09-02T00:00:00", "meter_reading": 64.1875}
+2024-06-16 14:38:26,136 - INFO - Received message from Redis: {"building": 1262, "timestamp": "2016-09-02T00:00:00", "meter_reading": 111.04}
+2024-06-16 14:38:26,137 - INFO - Sent to Kafka topic energy_consumption: {"building": 1262, "timestamp": "2016-09-02T00:00:00", "meter_reading": 111.04}
+2024-06-16 14:38:26,138 - INFO - Sent to Kafka topic energy_consumption: {"building": 1262, "timestamp": "2016-09-02T00:00:00", "meter_reading": 111.04}
+2024-06-16 14:38:26,139 - INFO - Sent to Kafka topic energy_consumption: {"building": 1262, "timestamp": "2016-09-02T00:00:00", "meter_reading": 111.04}
+2024-06-16 14:38:26,141 - INFO - Sent to Kafka topic energy_consumption: {"building": 1262, "timestamp": "2016-09-02T00:00:00", "meter_reading": 111.04}
+2024-06-16 14:38:26,141 - INFO - Received message from Redis: {"building": 1273, "timestamp": "2016-09-02T00:00:00", "meter_reading": 200.0}
+2024-06-16 14:38:26,142 - INFO - Sent to Kafka topic energy_consumption: {"building": 1273, "timestamp": "2016-09-02T00:00:00", "meter_reading": 200.0}
+2024-06-16 14:38:26,143 - INFO - Sent to Kafka topic energy_consumption: {"building": 1273, "timestamp": "2016-09-02T00:00:00", "meter_reading": 200.0}
+2024-06-16 14:38:26,144 - INFO - Sent to Kafka topic energy_consumption: {"building": 1273, "timestamp": "2016-09-02T00:00:00", "meter_reading": 200.0}
+2024-06-16 14:38:26,145 - INFO - Sent to Kafka topic energy_consumption: {"building": 1273, "timestamp": "2016-09-02T00:00:00", "meter_reading": 200.0}
+2024-06-16 14:38:26,145 - INFO - Received message from Redis: {"building": 1300, "timestamp": "2016-09-02T00:00:00", "meter_reading": 56.7226}
+2024-06-16 14:38:26,146 - INFO - Sent to Kafka topic energy_consumption: {"building": 1300, "timestamp": "2016-09-02T00:00:00", "meter_reading": 56.7226}
+2024-06-16 14:38:26,147 - INFO - Sent to Kafka topic energy_consumption: {"building": 1300, "timestamp": "2016-09-02T00:00:00", "meter_reading": 56.7226}
+2024-06-16 14:38:26,149 - INFO - Sent to Kafka topic energy_consumption: {"building": 1300, "timestamp": "2016-09-02T00:00:00", "meter_reading": 56.7226}
+2024-06-16 14:38:26,150 - INFO - Sent to Kafka topic energy_consumption: {"building": 1300, "timestamp": "2016-09-02T00:00:00", "meter_reading": 56.7226}
+2024-06-16 14:38:26,150 - INFO - Received message from Redis: {"building": 1285, "timestamp": "2016-09-02T00:00:00", "meter_reading": 228.0}
+2024-06-16 14:38:26,151 - INFO - Sent to Kafka topic energy_consumption: {"building": 1285, "timestamp": "2016-09-02T00:00:00", "meter_reading": 228.0}
+2024-06-16 14:38:26,152 - INFO - Sent to Kafka topic energy_consumption: {"building": 1285, "timestamp": "2016-09-02T00:00:00", "meter_reading": 228.0}
+2024-06-16 14:38:26,153 - INFO - Sent to Kafka topic energy_consumption: {"building": 1285, "timestamp": "2016-09-02T00:00:00", "meter_reading": 228.0}
+2024-06-16 14:38:26,154 - INFO - Sent to Kafka topic energy_consumption: {"building": 1285, "timestamp": "2016-09-02T00:00:00", "meter_reading": 228.0}
+2024-06-16 14:38:26,154 - INFO - Received message from Redis: {"building": 1303, "timestamp": "2016-09-02T00:00:00", "meter_reading": 587.373}
+2024-06-16 14:38:26,156 - INFO - Sent to Kafka topic energy_consumption: {"building": 1303, "timestamp": "2016-09-02T00:00:00", "meter_reading": 587.373}
+2024-06-16 14:38:26,157 - INFO - Sent to Kafka topic energy_consumption: {"building": 1303, "timestamp": "2016-09-02T00:00:00", "meter_reading": 587.373}
+2024-06-16 14:38:26,158 - INFO - Sent to Kafka topic energy_consumption: {"building": 1303, "timestamp": "2016-09-02T00:00:00", "meter_reading": 587.373}
+2024-06-16 14:38:26,159 - INFO - Sent to Kafka topic energy_consumption: {"building": 1303, "timestamp": "2016-09-02T00:00:00", "meter_reading": 587.373}
+2024-06-16 14:38:26,159 - INFO - Received message from Redis: {"building": 153, "timestamp": "2016-09-02T00:00:00", "meter_reading": 19.4}
+2024-06-16 14:38:26,160 - INFO - Sent to Kafka topic energy_consumption: {"building": 153, "timestamp": "2016-09-02T00:00:00", "meter_reading": 19.4}
+2024-06-16 14:38:26,161 - INFO - Sent to Kafka topic energy_consumption: {"building": 153, "timestamp": "2016-09-02T00:00:00", "meter_reading": 19.4}
+2024-06-16 14:38:26,162 - INFO - Sent to Kafka topic energy_consumption: {"building": 153, "timestamp": "2016-09-02T00:00:00", "meter_reading": 19.4}
+2024-06-16 14:38:26,163 - INFO - Sent to Kafka topic energy_consumption: {"building": 153, "timestamp": "2016-09-02T00:00:00", "meter_reading": 19.4}
+2024-06-16 14:38:26,163 - INFO - Received message from Redis: {"building": 729, "timestamp": "2016-09-02T00:00:00", "meter_reading": 3.7}
+2024-06-16 14:38:26,165 - INFO - Sent to Kafka topic energy_consumption: {"building": 729, "timestamp": "2016-09-02T00:00:00", "meter_reading": 3.7}
+2024-06-16 14:38:26,166 - INFO - Sent to Kafka topic energy_consumption: {"building": 729, "timestamp": "2016-09-02T00:00:00", "meter_reading": 3.7}
+2024-06-16 14:38:26,167 - INFO - Sent to Kafka topic energy_consumption: {"building": 729, "timestamp": "2016-09-02T00:00:00", "meter_reading": 3.7}
+2024-06-16 14:38:26,168 - INFO - Sent to Kafka topic energy_consumption: {"building": 729, "timestamp": "2016-09-02T00:00:00", "meter_reading": 3.7}
+2024-06-16 14:38:26,168 - INFO - Received message from Redis: {"building": 1232, "timestamp": "2016-09-02T00:00:00", "meter_reading": 274.967}
+2024-06-16 14:38:26,169 - INFO - Sent to Kafka topic energy_consumption: {"building": 1232, "timestamp": "2016-09-02T00:00:00", "meter_reading": 274.967}
+2024-06-16 14:38:26,170 - INFO - Sent to Kafka topic energy_consumption: {"building": 1232, "timestamp": "2016-09-02T00:00:00", "meter_reading": 274.967}
+2024-06-16 14:38:26,171 - INFO - Sent to Kafka topic energy_consumption: {"building": 1232, "timestamp": "2016-09-02T00:00:00", "meter_reading": 274.967}
+2024-06-16 14:38:26,172 - INFO - Sent to Kafka topic energy_consumption: {"building": 1232, "timestamp": "2016-09-02T00:00:00", "meter_reading": 274.967}
+2024-06-16 14:38:26,173 - INFO - Received message from Redis: {"building": 723, "timestamp": "2016-09-02T00:00:00", "meter_reading": 65.3}
+2024-06-16 14:38:26,174 - INFO - Sent to Kafka topic energy_consumption: {"building": 723, "timestamp": "2016-09-02T00:00:00", "meter_reading": 65.3}
+2024-06-16 14:38:26,175 - INFO - Sent to Kafka topic energy_consumption: {"building": 723, "timestamp": "2016-09-02T00:00:00", "meter_reading": 65.3}
+2024-06-16 14:38:26,176 - INFO - Sent to Kafka topic energy_consumption: {"building": 723, "timestamp": "2016-09-02T00:00:00", "meter_reading": 65.3}
+2024-06-16 14:38:26,177 - INFO - Sent to Kafka topic energy_consumption: {"building": 723, "timestamp": "2016-09-02T00:00:00", "meter_reading": 65.3}
+2024-06-16 14:38:26,177 - INFO - Received message from Redis: {"building": 1277, "timestamp": "2016-09-02T00:00:00", "meter_reading": 145.291}
+2024-06-16 14:38:26,178 - INFO - Sent to Kafka topic energy_consumption: {"building": 1277, "timestamp": "2016-09-02T00:00:00", "meter_reading": 145.291}
+2024-06-16 14:38:26,179 - INFO - Sent to Kafka topic energy_consumption: {"building": 1277, "timestamp": "2016-09-02T00:00:00", "meter_reading": 145.291}
+2024-06-16 14:38:26,180 - INFO - Sent to Kafka topic energy_consumption: {"building": 1277, "timestamp": "2016-09-02T00:00:00", "meter_reading": 145.291}
+2024-06-16 14:38:26,181 - INFO - Sent to Kafka topic energy_consumption: {"building": 1277, "timestamp": "2016-09-02T00:00:00", "meter_reading": 145.291}
+2024-06-16 14:39:25,825 - INFO - Received message from Redis: {"building": 39, "timestamp": "2016-09-02T01:00:00", "meter_reading": 313.636}
+2024-06-16 14:39:25,839 - INFO - Sent to Kafka topic energy_consumption: {"building": 39, "timestamp": "2016-09-02T01:00:00", "meter_reading": 313.636}
+2024-06-16 14:39:25,856 - INFO - Sent to Kafka topic energy_consumption: {"building": 39, "timestamp": "2016-09-02T01:00:00", "meter_reading": 313.636}
+2024-06-16 14:39:25,859 - INFO - Sent to Kafka topic energy_consumption: {"building": 39, "timestamp": "2016-09-02T01:00:00", "meter_reading": 313.636}
+2024-06-16 14:39:25,860 - INFO - Sent to Kafka topic energy_consumption: {"building": 39, "timestamp": "2016-09-02T01:00:00", "meter_reading": 313.636}
+2024-06-16 14:39:25,861 - INFO - Received message from Redis: {"building": 45, "timestamp": "2016-09-02T01:00:00", "meter_reading": 4.7779}
+2024-06-16 14:39:25,862 - INFO - Sent to Kafka topic energy_consumption: {"building": 45, "timestamp": "2016-09-02T01:00:00", "meter_reading": 4.7779}
+2024-06-16 14:39:25,863 - INFO - Sent to Kafka topic energy_consumption: {"building": 45, "timestamp": "2016-09-02T01:00:00", "meter_reading": 4.7779}
+2024-06-16 14:39:25,865 - INFO - Sent to Kafka topic energy_consumption: {"building": 45, "timestamp": "2016-09-02T01:00:00", "meter_reading": 4.7779}
+2024-06-16 14:39:25,866 - INFO - Sent to Kafka topic energy_consumption: {"building": 45, "timestamp": "2016-09-02T01:00:00", "meter_reading": 4.7779}
+2024-06-16 14:39:25,866 - INFO - Received message from Redis: {"building": 56, "timestamp": "2016-09-02T01:00:00", "meter_reading": 272.341}
+2024-06-16 14:39:25,867 - INFO - Sent to Kafka topic energy_consumption: {"building": 56, "timestamp": "2016-09-02T01:00:00", "meter_reading": 272.341}
+2024-06-16 14:39:25,868 - INFO - Sent to Kafka topic energy_consumption: {"building": 56, "timestamp": "2016-09-02T01:00:00", "meter_reading": 272.341}
+2024-06-16 14:39:25,869 - INFO - Sent to Kafka topic energy_consumption: {"building": 56, "timestamp": "2016-09-02T01:00:00", "meter_reading": 272.341}
+2024-06-16 14:39:25,870 - INFO - Sent to Kafka topic energy_consumption: {"building": 56, "timestamp": "2016-09-02T01:00:00", "meter_reading": 272.341}
+2024-06-16 14:39:25,870 - INFO - Received message from Redis: {"building": 75, "timestamp": "2016-09-02T01:00:00", "meter_reading": 182.926}
+2024-06-16 14:39:25,871 - INFO - Sent to Kafka topic energy_consumption: {"building": 75, "timestamp": "2016-09-02T01:00:00", "meter_reading": 182.926}
+2024-06-16 14:39:25,872 - INFO - Sent to Kafka topic energy_consumption: {"building": 75, "timestamp": "2016-09-02T01:00:00", "meter_reading": 182.926}
+2024-06-16 14:39:25,874 - INFO - Sent to Kafka topic energy_consumption: {"building": 75, "timestamp": "2016-09-02T01:00:00", "meter_reading": 182.926}
+2024-06-16 14:39:25,875 - INFO - Sent to Kafka topic energy_consumption: {"building": 75, "timestamp": "2016-09-02T01:00:00", "meter_reading": 182.926}
+2024-06-16 14:39:25,875 - INFO - Received message from Redis: {"building": 82, "timestamp": "2016-09-02T01:00:00", "meter_reading": 48.7348}
+2024-06-16 14:39:25,876 - INFO - Sent to Kafka topic energy_consumption: {"building": 82, "timestamp": "2016-09-02T01:00:00", "meter_reading": 48.7348}
+2024-06-16 14:39:25,877 - INFO - Sent to Kafka topic energy_consumption: {"building": 82, "timestamp": "2016-09-02T01:00:00", "meter_reading": 48.7348}
+2024-06-16 14:39:25,878 - INFO - Sent to Kafka topic energy_consumption: {"building": 82, "timestamp": "2016-09-02T01:00:00", "meter_reading": 48.7348}
+2024-06-16 14:39:25,879 - INFO - Sent to Kafka topic energy_consumption: {"building": 82, "timestamp": "2016-09-02T01:00:00", "meter_reading": 48.7348}
+2024-06-16 14:39:25,879 - INFO - Received message from Redis: {"building": 77, "timestamp": "2016-09-02T01:00:00", "meter_reading": 126.683}
+2024-06-16 14:39:25,880 - INFO - Sent to Kafka topic energy_consumption: {"building": 77, "timestamp": "2016-09-02T01:00:00", "meter_reading": 126.683}
+2024-06-16 14:39:25,881 - INFO - Sent to Kafka topic energy_consumption: {"building": 77, "timestamp": "2016-09-02T01:00:00", "meter_reading": 126.683}
+2024-06-16 14:39:25,882 - INFO - Sent to Kafka topic energy_consumption: {"building": 77, "timestamp": "2016-09-02T01:00:00", "meter_reading": 126.683}
+2024-06-16 14:39:25,883 - INFO - Sent to Kafka topic energy_consumption: {"building": 77, "timestamp": "2016-09-02T01:00:00", "meter_reading": 126.683}
+2024-06-16 14:39:25,883 - INFO - Received message from Redis: {"building": 110, "timestamp": "2016-09-02T01:00:00", "meter_reading": 317.0}
+2024-06-16 14:39:25,884 - INFO - Sent to Kafka topic energy_consumption: {"building": 110, "timestamp": "2016-09-02T01:00:00", "meter_reading": 317.0}
+2024-06-16 14:39:25,885 - INFO - Sent to Kafka topic energy_consumption: {"building": 110, "timestamp": "2016-09-02T01:00:00", "meter_reading": 317.0}
+2024-06-16 14:39:25,886 - INFO - Sent to Kafka topic energy_consumption: {"building": 110, "timestamp": "2016-09-02T01:00:00", "meter_reading": 317.0}
+2024-06-16 14:39:25,888 - INFO - Sent to Kafka topic energy_consumption: {"building": 110, "timestamp": "2016-09-02T01:00:00", "meter_reading": 317.0}
+2024-06-16 14:39:25,888 - INFO - Received message from Redis: {"building": 114, "timestamp": "2016-09-02T01:00:00", "meter_reading": 779.5}
+2024-06-16 14:39:25,889 - INFO - Sent to Kafka topic energy_consumption: {"building": 114, "timestamp": "2016-09-02T01:00:00", "meter_reading": 779.5}
+2024-06-16 14:39:25,890 - INFO - Sent to Kafka topic energy_consumption: {"building": 114, "timestamp": "2016-09-02T01:00:00", "meter_reading": 779.5}
+2024-06-16 14:39:25,892 - INFO - Sent to Kafka topic energy_consumption: {"building": 114, "timestamp": "2016-09-02T01:00:00", "meter_reading": 779.5}
+2024-06-16 14:39:25,893 - INFO - Sent to Kafka topic energy_consumption: {"building": 114, "timestamp": "2016-09-02T01:00:00", "meter_reading": 779.5}
+2024-06-16 14:39:25,893 - INFO - Received message from Redis: {"building": 124, "timestamp": "2016-09-02T01:00:00", "meter_reading": 20.2}
+2024-06-16 14:39:25,894 - INFO - Sent to Kafka topic energy_consumption: {"building": 124, "timestamp": "2016-09-02T01:00:00", "meter_reading": 20.2}
+2024-06-16 14:39:25,895 - INFO - Sent to Kafka topic energy_consumption: {"building": 124, "timestamp": "2016-09-02T01:00:00", "meter_reading": 20.2}
+2024-06-16 14:39:25,896 - INFO - Sent to Kafka topic energy_consumption: {"building": 124, "timestamp": "2016-09-02T01:00:00", "meter_reading": 20.2}
+2024-06-16 14:39:25,897 - INFO - Sent to Kafka topic energy_consumption: {"building": 124, "timestamp": "2016-09-02T01:00:00", "meter_reading": 20.2}
+2024-06-16 14:39:25,897 - INFO - Received message from Redis: {"building": 152, "timestamp": "2016-09-02T01:00:00", "meter_reading": 7.6463}
+2024-06-16 14:39:25,898 - INFO - Sent to Kafka topic energy_consumption: {"building": 152, "timestamp": "2016-09-02T01:00:00", "meter_reading": 7.6463}
+2024-06-16 14:39:25,899 - INFO - Sent to Kafka topic energy_consumption: {"building": 152, "timestamp": "2016-09-02T01:00:00", "meter_reading": 7.6463}
+2024-06-16 14:39:25,900 - INFO - Sent to Kafka topic energy_consumption: {"building": 152, "timestamp": "2016-09-02T01:00:00", "meter_reading": 7.6463}
+2024-06-16 14:39:25,901 - INFO - Sent to Kafka topic energy_consumption: {"building": 152, "timestamp": "2016-09-02T01:00:00", "meter_reading": 7.6463}
+2024-06-16 14:39:25,902 - INFO - Received message from Redis: {"building": 153, "timestamp": "2016-09-02T01:00:00", "meter_reading": 17.2}
+2024-06-16 14:39:25,903 - INFO - Sent to Kafka topic energy_consumption: {"building": 153, "timestamp": "2016-09-02T01:00:00", "meter_reading": 17.2}
+2024-06-16 14:39:25,904 - INFO - Sent to Kafka topic energy_consumption: {"building": 153, "timestamp": "2016-09-02T01:00:00", "meter_reading": 17.2}
+2024-06-16 14:39:25,905 - INFO - Sent to Kafka topic energy_consumption: {"building": 153, "timestamp": "2016-09-02T01:00:00", "meter_reading": 17.2}
+2024-06-16 14:39:25,906 - INFO - Sent to Kafka topic energy_consumption: {"building": 153, "timestamp": "2016-09-02T01:00:00", "meter_reading": 17.2}
+2024-06-16 14:39:25,906 - INFO - Received message from Redis: {"building": 675, "timestamp": "2016-09-02T01:00:00", "meter_reading": 40.4}
+2024-06-16 14:39:25,907 - INFO - Sent to Kafka topic energy_consumption: {"building": 675, "timestamp": "2016-09-02T01:00:00", "meter_reading": 40.4}
+2024-06-16 14:39:25,908 - INFO - Sent to Kafka topic energy_consumption: {"building": 675, "timestamp": "2016-09-02T01:00:00", "meter_reading": 40.4}
+2024-06-16 14:39:25,909 - INFO - Sent to Kafka topic energy_consumption: {"building": 675, "timestamp": "2016-09-02T01:00:00", "meter_reading": 40.4}
+2024-06-16 14:39:25,910 - INFO - Sent to Kafka topic energy_consumption: {"building": 675, "timestamp": "2016-09-02T01:00:00", "meter_reading": 40.4}
+2024-06-16 14:39:25,910 - INFO - Received message from Redis: {"building": 683, "timestamp": "2016-09-02T01:00:00", "meter_reading": 1.4}
+2024-06-16 14:39:25,911 - INFO - Sent to Kafka topic energy_consumption: {"building": 683, "timestamp": "2016-09-02T01:00:00", "meter_reading": 1.4}
+2024-06-16 14:39:25,912 - INFO - Sent to Kafka topic energy_consumption: {"building": 683, "timestamp": "2016-09-02T01:00:00", "meter_reading": 1.4}
+2024-06-16 14:39:25,913 - INFO - Sent to Kafka topic energy_consumption: {"building": 683, "timestamp": "2016-09-02T01:00:00", "meter_reading": 1.4}
+2024-06-16 14:39:25,914 - INFO - Sent to Kafka topic energy_consumption: {"building": 683, "timestamp": "2016-09-02T01:00:00", "meter_reading": 1.4}
+2024-06-16 14:39:25,914 - INFO - Received message from Redis: {"building": 702, "timestamp": "2016-09-02T01:00:00", "meter_reading": 9.6}
+2024-06-16 14:39:25,915 - INFO - Sent to Kafka topic energy_consumption: {"building": 702, "timestamp": "2016-09-02T01:00:00", "meter_reading": 9.6}
+2024-06-16 14:39:25,916 - INFO - Sent to Kafka topic energy_consumption: {"building": 702, "timestamp": "2016-09-02T01:00:00", "meter_reading": 9.6}
+2024-06-16 14:39:25,917 - INFO - Sent to Kafka topic energy_consumption: {"building": 702, "timestamp": "2016-09-02T01:00:00", "meter_reading": 9.6}
+2024-06-16 14:39:25,919 - INFO - Sent to Kafka topic energy_consumption: {"building": 702, "timestamp": "2016-09-02T01:00:00", "meter_reading": 9.6}
+2024-06-16 14:39:25,919 - INFO - Received message from Redis: {"building": 723, "timestamp": "2016-09-02T01:00:00", "meter_reading": 62.9}
+2024-06-16 14:39:25,920 - INFO - Sent to Kafka topic energy_consumption: {"building": 723, "timestamp": "2016-09-02T01:00:00", "meter_reading": 62.9}
+2024-06-16 14:39:25,921 - INFO - Sent to Kafka topic energy_consumption: {"building": 723, "timestamp": "2016-09-02T01:00:00", "meter_reading": 62.9}
+2024-06-16 14:39:25,922 - INFO - Sent to Kafka topic energy_consumption: {"building": 723, "timestamp": "2016-09-02T01:00:00", "meter_reading": 62.9}
+2024-06-16 14:39:25,923 - INFO - Sent to Kafka topic energy_consumption: {"building": 723, "timestamp": "2016-09-02T01:00:00", "meter_reading": 62.9}
+2024-06-16 14:39:25,923 - INFO - Received message from Redis: {"building": 724, "timestamp": "2016-09-02T01:00:00", "meter_reading": 14.6}
+2024-06-16 14:39:25,924 - INFO - Sent to Kafka topic energy_consumption: {"building": 724, "timestamp": "2016-09-02T01:00:00", "meter_reading": 14.6}
+2024-06-16 14:39:25,925 - INFO - Sent to Kafka topic energy_consumption: {"building": 724, "timestamp": "2016-09-02T01:00:00", "meter_reading": 14.6}
+2024-06-16 14:39:25,926 - INFO - Sent to Kafka topic energy_consumption: {"building": 724, "timestamp": "2016-09-02T01:00:00", "meter_reading": 14.6}
+2024-06-16 14:39:25,927 - INFO - Sent to Kafka topic energy_consumption: {"building": 724, "timestamp": "2016-09-02T01:00:00", "meter_reading": 14.6}
+2024-06-16 14:39:25,927 - INFO - Received message from Redis: {"building": 729, "timestamp": "2016-09-02T01:00:00", "meter_reading": 3.7}
+2024-06-16 14:39:25,928 - INFO - Sent to Kafka topic energy_consumption: {"building": 729, "timestamp": "2016-09-02T01:00:00", "meter_reading": 3.7}
+2024-06-16 14:39:25,929 - INFO - Sent to Kafka topic energy_consumption: {"building": 729, "timestamp": "2016-09-02T01:00:00", "meter_reading": 3.7}
+2024-06-16 14:39:25,931 - INFO - Sent to Kafka topic energy_consumption: {"building": 729, "timestamp": "2016-09-02T01:00:00", "meter_reading": 3.7}
+2024-06-16 14:39:25,932 - INFO - Sent to Kafka topic energy_consumption: {"building": 729, "timestamp": "2016-09-02T01:00:00", "meter_reading": 3.7}
+2024-06-16 14:39:25,932 - INFO - Received message from Redis: {"building": 1232, "timestamp": "2016-09-02T01:00:00", "meter_reading": 268.01}
+2024-06-16 14:39:25,933 - INFO - Sent to Kafka topic energy_consumption: {"building": 1232, "timestamp": "2016-09-02T01:00:00", "meter_reading": 268.01}
+2024-06-16 14:39:25,934 - INFO - Sent to Kafka topic energy_consumption: {"building": 1232, "timestamp": "2016-09-02T01:00:00", "meter_reading": 268.01}
+2024-06-16 14:39:25,935 - INFO - Sent to Kafka topic energy_consumption: {"building": 1232, "timestamp": "2016-09-02T01:00:00", "meter_reading": 268.01}
+2024-06-16 14:39:25,936 - INFO - Sent to Kafka topic energy_consumption: {"building": 1232, "timestamp": "2016-09-02T01:00:00", "meter_reading": 268.01}
+2024-06-16 14:39:25,936 - INFO - Received message from Redis: {"building": 1245, "timestamp": "2016-09-02T01:00:00", "meter_reading": 66.9375}
+2024-06-16 14:39:25,937 - INFO - Sent to Kafka topic energy_consumption: {"building": 1245, "timestamp": "2016-09-02T01:00:00", "meter_reading": 66.9375}
+2024-06-16 14:39:25,938 - INFO - Sent to Kafka topic energy_consumption: {"building": 1245, "timestamp": "2016-09-02T01:00:00", "meter_reading": 66.9375}
+2024-06-16 14:39:25,939 - INFO - Sent to Kafka topic energy_consumption: {"building": 1245, "timestamp": "2016-09-02T01:00:00", "meter_reading": 66.9375}
+2024-06-16 14:39:25,940 - INFO - Sent to Kafka topic energy_consumption: {"building": 1245, "timestamp": "2016-09-02T01:00:00", "meter_reading": 66.9375}
+2024-06-16 14:39:25,940 - INFO - Received message from Redis: {"building": 1262, "timestamp": "2016-09-02T01:00:00", "meter_reading": 108.68}
+2024-06-16 14:39:25,941 - INFO - Sent to Kafka topic energy_consumption: {"building": 1262, "timestamp": "2016-09-02T01:00:00", "meter_reading": 108.68}
+2024-06-16 14:39:25,942 - INFO - Sent to Kafka topic energy_consumption: {"building": 1262, "timestamp": "2016-09-02T01:00:00", "meter_reading": 108.68}
+2024-06-16 14:39:25,944 - INFO - Sent to Kafka topic energy_consumption: {"building": 1262, "timestamp": "2016-09-02T01:00:00", "meter_reading": 108.68}
+2024-06-16 14:39:25,945 - INFO - Sent to Kafka topic energy_consumption: {"building": 1262, "timestamp": "2016-09-02T01:00:00", "meter_reading": 108.68}
+2024-06-16 14:39:25,945 - INFO - Received message from Redis: {"building": 1273, "timestamp": "2016-09-02T01:00:00", "meter_reading": 195.0}
+2024-06-16 14:39:25,946 - INFO - Sent to Kafka topic energy_consumption: {"building": 1273, "timestamp": "2016-09-02T01:00:00", "meter_reading": 195.0}
+2024-06-16 14:39:25,947 - INFO - Sent to Kafka topic energy_consumption: {"building": 1273, "timestamp": "2016-09-02T01:00:00", "meter_reading": 195.0}
+2024-06-16 14:39:25,948 - INFO - Sent to Kafka topic energy_consumption: {"building": 1273, "timestamp": "2016-09-02T01:00:00", "meter_reading": 195.0}
+2024-06-16 14:39:25,949 - INFO - Sent to Kafka topic energy_consumption: {"building": 1273, "timestamp": "2016-09-02T01:00:00", "meter_reading": 195.0}
+2024-06-16 14:39:25,949 - INFO - Received message from Redis: {"building": 1277, "timestamp": "2016-09-02T01:00:00", "meter_reading": 126.963}
+2024-06-16 14:39:25,950 - INFO - Sent to Kafka topic energy_consumption: {"building": 1277, "timestamp": "2016-09-02T01:00:00", "meter_reading": 126.963}
+2024-06-16 14:39:25,951 - INFO - Sent to Kafka topic energy_consumption: {"building": 1277, "timestamp": "2016-09-02T01:00:00", "meter_reading": 126.963}
+2024-06-16 14:39:25,952 - INFO - Sent to Kafka topic energy_consumption: {"building": 1277, "timestamp": "2016-09-02T01:00:00", "meter_reading": 126.963}
+2024-06-16 14:39:25,953 - INFO - Sent to Kafka topic energy_consumption: {"building": 1277, "timestamp": "2016-09-02T01:00:00", "meter_reading": 126.963}
+2024-06-16 14:39:25,953 - INFO - Received message from Redis: {"building": 1285, "timestamp": "2016-09-02T01:00:00", "meter_reading": 216.0}
+2024-06-16 14:39:25,954 - INFO - Sent to Kafka topic energy_consumption: {"building": 1285, "timestamp": "2016-09-02T01:00:00", "meter_reading": 216.0}
+2024-06-16 14:39:25,955 - INFO - Sent to Kafka topic energy_consumption: {"building": 1285, "timestamp": "2016-09-02T01:00:00", "meter_reading": 216.0}
+2024-06-16 14:39:25,956 - INFO - Sent to Kafka topic energy_consumption: {"building": 1285, "timestamp": "2016-09-02T01:00:00", "meter_reading": 216.0}
+2024-06-16 14:39:25,958 - INFO - Sent to Kafka topic energy_consumption: {"building": 1285, "timestamp": "2016-09-02T01:00:00", "meter_reading": 216.0}
+2024-06-16 14:39:25,958 - INFO - Received message from Redis: {"building": 1300, "timestamp": "2016-09-02T01:00:00", "meter_reading": 57.2092}
+2024-06-16 14:39:25,959 - INFO - Sent to Kafka topic energy_consumption: {"building": 1300, "timestamp": "2016-09-02T01:00:00", "meter_reading": 57.2092}
+2024-06-16 14:39:25,960 - INFO - Sent to Kafka topic energy_consumption: {"building": 1300, "timestamp": "2016-09-02T01:00:00", "meter_reading": 57.2092}
+2024-06-16 14:39:25,961 - INFO - Sent to Kafka topic energy_consumption: {"building": 1300, "timestamp": "2016-09-02T01:00:00", "meter_reading": 57.2092}
+2024-06-16 14:39:25,962 - INFO - Sent to Kafka topic energy_consumption: {"building": 1300, "timestamp": "2016-09-02T01:00:00", "meter_reading": 57.2092}
+2024-06-16 14:39:25,962 - INFO - Received message from Redis: {"building": 1303, "timestamp": "2016-09-02T01:00:00", "meter_reading": 561.372}
+2024-06-16 14:39:25,963 - INFO - Sent to Kafka topic energy_consumption: {"building": 1303, "timestamp": "2016-09-02T01:00:00", "meter_reading": 561.372}
+2024-06-16 14:39:25,964 - INFO - Sent to Kafka topic energy_consumption: {"building": 1303, "timestamp": "2016-09-02T01:00:00", "meter_reading": 561.372}
+2024-06-16 14:39:25,965 - INFO - Sent to Kafka topic energy_consumption: {"building": 1303, "timestamp": "2016-09-02T01:00:00", "meter_reading": 561.372}
+2024-06-16 14:39:25,966 - INFO - Sent to Kafka topic energy_consumption: {"building": 1303, "timestamp": "2016-09-02T01:00:00", "meter_reading": 561.372}

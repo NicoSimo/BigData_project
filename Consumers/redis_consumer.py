@@ -55,6 +55,7 @@ def run_redis_consumer():
         data = json.loads(message.value.decode('utf-8'))
         key = f"building:{data['building_id']}"
         measurement = json.dumps({
+            "building" : data['building_id'],
             "timestamp": data['timestamp'],
             "meter_reading": data['meter_reading']
         })
@@ -66,8 +67,11 @@ def run_redis_consumer():
         # LTRIM: Trims the list to ensure only the last 5 entries are kept. This operation is efficient and ensures the list only contains the most recent 5 updates.
         # LRANGE: Retrieves the latest 5 entries from the list at key. This operation is optional and can be used for debugging purposes.
         
-        r.lpush(key, measurement)
+        #r.lpush(key, measurement)
         #r.ltrim(key, 0, 4)  # Keeps the latest 5 entries in the list (0-4) -----> 5 elements needs to be aligned with the TTL.
+
+        r.publish('prova', measurement)
+
         # In here instead of setting a TTL, we are using the LTRIM to keep the latest 5 entries. It is done to simulate the behaviour of the TTL while the code is still under change.
 
         # Optionally print the current list

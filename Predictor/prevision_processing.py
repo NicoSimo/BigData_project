@@ -57,6 +57,7 @@ def subscribe_and_process():
 
 
 def process_and_send_to_kafka(message):
+    #### TODO: Manca qua da fare la previsione col modello già pronto
     try:
         for broker, producer in producers.items():
             producer.send(topic_name, message)

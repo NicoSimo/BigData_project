@@ -5,6 +5,7 @@ import os
 import logging
 import json
 import time
+import weather_measurements as wm
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -20,10 +21,13 @@ log.addHandler(file_handler)
 # Redis and Kafka configuration
 redis_host = os.getenv('REDIS_HOST', 'redis')
 kafka_brokers = os.getenv('KAFKA_BROKER', 'kafka1:9092,kafka2:9093,kafka3:9094,kafka4:9095').split(',')
-topic_name = os.getenv('KAFKA_TOPIC', 'energy_consumption_predictions')
+topic_name = 'energy_consumption_predictions'
 
 # Initialize Redis and Kafka producers
 r = redis.Redis(host=redis_host, port=6379, db=0)
+pubsub = r.pubsub()
+pubsub.subscribe('data_updates')
+
 producers = {}
 
 def initialize_kafka_producer(broker):
@@ -44,19 +48,15 @@ def initialize_kafka_producer(broker):
 for broker in kafka_brokers:
     producers[broker] = initialize_kafka_producer(broker)
 
-def subscribe_and_process():
-    pubsub = r.pubsub()
-    pubsub.subscribe('prova')
-    log.info('Subscribed to Redis channel "prova".')
-
-    for message in pubsub.listen():
-        if message['type'] == 'message':
-            data = message['data'].decode('utf-8')
-            log.info(f"Received message from Redis: {data}")
-            process_and_send_to_kafka(data)
+# Configure the weather station codes to get the weather predictions
+station_code1 = "T0409" #Trento
+station_code2 = "T0147" #Rovereto
+station_code3 = "T0392" #Borgo Valsugana
+station_code4 = "T0179" #Tione
 
 
-def process_and_send_to_kafka(message):
+
+def send_to_kafka(message):
     try:
         for broker, producer in producers.items():
             producer.send(topic_name, message)
@@ -65,5 +65,25 @@ def process_and_send_to_kafka(message):
     except Exception as e:
         log.error(f"Failed to send message to Kafka: {e}")
 
+def process():
+    for message in pubsub.listen():
+        if message['type'] == 'message':
+            key = message['data'].decode('utf-8')
+            # Retrieve the latest data for the key
+            latest_data = r.lrange(key, 0, 0)  # Get the most recent entry
+
+            # Retrieve all weather measurements data via the Provincia API
+            area1_pred = wm.get_latest_measurements(station_code1)
+            area2_pred = wm.get_latest_measurements(station_code2)
+            area3_pred = wm.get_latest_measurements(station_code3)
+            area4_pred = wm.get_latest_measurements(station_code4)
+
+            #QUA CI VA LA ROBA CHE EFFETTIVAMENTE FA LE PREVISIONI
+
+            if latest_data:
+                data = latest_data[0].decode('utf-8')
+                log.info(f"Received message from Redis: {data}")
+                send_to_kafka(data)
+
 if __name__ == '__main__':
-    subscribe_and_process()
+    process()

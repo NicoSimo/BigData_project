@@ -22,11 +22,11 @@ def run_redis_consumer():
     while True:
         try:
             consumer = KafkaConsumer(
-                topic_name, # The topic to consume messages from
                 bootstrap_servers=kafka_brokers, # The Kafka cluster's address
                 auto_offset_reset='earliest', 
                 group_id='energy_consumption' # The consumer group ID
             )
+            consumer.subscribe(topic_name)
             break
 
         except NoBrokersAvailable:

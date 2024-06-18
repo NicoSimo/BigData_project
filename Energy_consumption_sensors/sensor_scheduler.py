@@ -7,6 +7,7 @@ import sys
 import os
 from kafka import KafkaProducer
 from kafka.errors import NoBrokersAvailable
+from kafka.admin import KafkaAdminClient, NewTopic
 import json
 import socket
 import logging
@@ -40,6 +41,24 @@ def check_kafka_connectivity(kafka_brokers):
             log.error(f"Error parsing broker '{broker}': {e}")
     return False
 
+def create_topic_if_not_exists(topic_name, num_partitions, replication_factor, kafka_brokers):
+    admin_client = KafkaAdminClient(
+        bootstrap_servers=kafka_brokers,
+        client_id='sensor_scheduler'
+    )
+
+    existing_topics = admin_client.list_topics()
+    if topic_name in existing_topics:
+        log.info(f"Topic '{topic_name}' already exists.")
+        return
+
+    topic_list = [NewTopic(name=topic_name, num_partitions=num_partitions, replication_factor=replication_factor)]
+    try:
+        admin_client.create_topics(new_topics=topic_list, validate_only=False)
+        log.info(f"Topic '{topic_name}' created with {num_partitions} partitions and replication factor of {replication_factor}.")
+    except Exception as e:
+        log.error(f"Error creating topic '{topic_name}': {e}")
+
 def assign_broker_to_site(site_id, site_to_broker):
     if site_id not in site_to_broker:
         broker_index = len(site_to_broker) % len(kafka_brokers)
@@ -65,6 +84,12 @@ def run_sensor_scheduler():
         log.warning("Kafka brokers not available, retrying in 5 seconds...")
         time.sleep(5)
 
+    # Create topic with specified partitions and replication factor if it doesn't exist
+    topic_name = 'energy_consumption_topic'
+    num_partitions = 5
+    replication_factor = 3
+    create_topic_if_not_exists(topic_name, num_partitions, replication_factor, kafka_brokers)
+
     producers = {}
     for broker in kafka_brokers:
         try:
@@ -85,7 +110,7 @@ def run_sensor_scheduler():
         producer = producers[broker]
         building_id = sensor['building_id']
         sensor_data = df_measurements[df_measurements['building_id'] == building_id]
-        sensors.append(Sensor(building_id, 'energy_consumption_topic', sensor_data, producer))
+        sensors.append(Sensor(building_id, topic_name, sensor_data, producer))
 
     # This function alone updates data only ONCE. To increase the frequency of update set by the scheduler.every() function.
     def trigger_sensors():
@@ -100,6 +125,10 @@ def run_sensor_scheduler():
 
         for thread in threads:
             thread.join()
+
+        # Flush the producer to ensure all messages are sent
+        for producer in producers.values():
+            producer.flush()
 
     update_time = int(os.getenv('UPDATE_TIME', 30))
 

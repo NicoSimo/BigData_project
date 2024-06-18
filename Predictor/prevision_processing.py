@@ -54,8 +54,6 @@ station_code2 = "T0147" #Rovereto
 station_code3 = "T0392" #Borgo Valsugana
 station_code4 = "T0179" #Tione
 
-
-
 def send_to_kafka(message):
     try:
         for broker, producer in producers.items():

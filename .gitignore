@@ -1,3 +1,4 @@
 myenv/
 POSTGRE_TABLES.pdf
 app.log
+postgres_data.tar.gz

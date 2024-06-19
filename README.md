@@ -26,34 +26,10 @@ Moving all the python scripts in a dedicated container. (TO DO) --> NEED TO MODI
 
 The info such as DB names, pw, user are in the .env file. The file is uploaded given the educational goal of the project. 
 
-To run the whole project you need (in order):
+To run the whole project you need to (in order):
 
 - Download the dataset 
 - Fix the paths in the dataset_prep.py file 
-- Run 'pip install requirements.txt -r'
-- 'Docker-compose up -d' to run the containers
-- (OPTIONAL) 'Docker ps' to verify the status 
-- Run 'Energy_Consumption_sensors/Main.py' to start the KAFKA data transmission
-- Run on another terminal window 'Consumers/redis.consumer.py' to start collecting data with redis
+- 'Docker-compose up --build -d' to run the containers
+- (OPTIONAL) 'Docker ps' to verify the status
 - ... (TO DO)
-
-####################################################################################################################################
-RIMUOVERE PW ECC DAL DOCKER COMPOSE (?)
-
-FIXARE 'main.py' ---> REIMPOSTARE L'UPDATE TIME
-
-Consumers/kafka_redis_consumer.py - Energy_consumption_sensors/sensor_scheduler.py - Main.py SONO DEI TEST PER ESEGUIRE TUTTO SIMULTANEAMENTE.
-
-FIXARE --> TEMPO DI AGGIORNAMENTO ERRATO 
-FIXATO --> SEMBREREBBE RICOMINCIARE QUANDO FINISCE IL FILE dei sensors.
-
-FIXED --> test.py SERVE A CAPIRE COSA SUCCEDE ALL'INTERNO DELLA GENERAZIONE DEI DATI
-           INVIATI POI COME SENSORI DA KAFKA.
-
-test.py contiene una simulazione funzionante dell'invio dei dati. Ora vi è da implementare il meccanismo con Kafka.
-
-FIX --> KAFKA PARTITIONS AND REPLICATION FACTOR
-
-TROVARE GROUND TRUTH - (N = 3 ORE ?) IMMAGAZZINARE 4 ORE POI PRODURRE PREVISIONE -
-
-DATASET DEVE AGGIUNGERE LA COLONNA Y CHE SARA' LA SOMMA DELLE (N-1) ORE SUCCESSIVE.

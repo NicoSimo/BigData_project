@@ -63,7 +63,7 @@ filtered_sites = building_data[building_data['site_id'].isin(random_sites)]
 random_building_ids = filtered_sites['building_id'].sample(n=25, random_state=42)
 
 # Filter weather data to only keep relevant informations
-weather_data = weather_data[['site_id', 'timestamp', 'air_temperature', 'cloud_coverage', 'precip_depth_1_hr']]
+weather_data = weather_data[['site_id', 'timestamp', 'air_temperature', 'wind_speed', 'precip_depth_1_hr']]
 
 # Filter data for the selected building IDs and meter 0 (electricity)
 historical_data = historical_data[(historical_data['building_id'].isin(random_building_ids)) & (historical_data['meter'] == 0)]

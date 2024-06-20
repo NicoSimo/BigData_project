@@ -6,6 +6,8 @@ import logging
 import json
 import time
 import weather_measurements as wm
+import torch
+import torch.nn as nn
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -28,7 +30,28 @@ r = redis.Redis(host=redis_host, port=6379, db=0)
 pubsub = r.pubsub()
 pubsub.subscribe('data_updates')
 
+# Load ML model
+model = torch.load("lstm.pt")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
+model.eval()
+
 producers = {}
+
+def DLModel(input):
+
+    # PREPROCESSING DEI DATI PERCHE' NON SO COME ARRIVINO
+    """INPUT: torch.tensor di dimensione (1,3,7) tale che:
+    3 siano gli ultimi tre dati dal meno recente al più recente con componenti
+    Ora del giorno, meter_reading, square_feet,	year_built,	air_temperature, cloud_coverage, precip_depth_1_hr
+
+    OUTPUT: torch.tensor di dimensioni (1,1)
+    """
+
+    input = input.to(device)
+    input = input.to(torch.float32)
+    output = model(input)
+    return output
 
 def initialize_kafka_producer(broker):
     while True:
@@ -77,6 +100,7 @@ def process():
             area4_pred = wm.get_latest_measurements(station_code4)
 
             #QUA CI VA LA ROBA CHE EFFETTIVAMENTE FA LE PREVISIONI
+            prevision = DLModel(...)
 
             if latest_data:
                 data = latest_data[0].decode('utf-8')

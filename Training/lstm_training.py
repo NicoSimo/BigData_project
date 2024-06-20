@@ -145,4 +145,4 @@ for epoch in range(20):
     scheduler.step()
 
     # Save the model
-    torch.save(model, "lstm.pt")
+    torch.save(model, "/Predictor/lstm.pt")

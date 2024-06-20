@@ -23,11 +23,7 @@ class EnergyDataset(Dataset):
         sequence = np.array(sequence).reshape((self.sequence_length, -1))
         target = np.array(target).reshape((1, -1))
         return sequence, target
-
-    def preprocess_data(self):
-        # Preprocess your data here, e.g. normalization, scaling, etc.
-        # In this example, we'll just return the DataFrame as is
-        return self.dataframe.values
+        
 
 # Deep Learning Model
 class LSTMModel(nn.Module):

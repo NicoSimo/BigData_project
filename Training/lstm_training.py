@@ -12,7 +12,6 @@ class EnergyDataset(Dataset):
     def __init__(self, dataframe, sequence_length):
         self.dataframe = dataframe
         self.sequence_length = sequence_length
-        self.data = self.preprocess_data()
 
     def __len__(self):
         return len(self.data) - self.sequence_length

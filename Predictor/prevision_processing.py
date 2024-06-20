@@ -41,11 +41,11 @@ producers = {}
 def DLModel(input):
 
     # PREPROCESSING DEI DATI PERCHE' NON SO COME ARRIVINO
-    """INPUT: torch.tensor di dimensione (1,3,7) tale che:
+    """INPUT: torch.tensor di dimensione (batch_size,3,7) tale che:
     3 siano gli ultimi tre dati dal meno recente al più recente con componenti
     Ora del giorno, meter_reading, square_feet,	year_built,	air_temperature, cloud_coverage, precip_depth_1_hr
 
-    OUTPUT: torch.tensor di dimensioni (1,1)
+    OUTPUT: torch.tensor di dimensioni (batch_size,1)
     """
 
     input = input.to(device)

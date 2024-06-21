@@ -5,8 +5,8 @@ import os
 import logging
 import json
 import time
-import weather_measurements as wm
-from rf_training import RFCaller
+import Predictor.weather_measurements as wm
+from Predictor.rf_training import RFCaller
 import numpy as np
 
 # Configure logging

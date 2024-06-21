@@ -10,6 +10,8 @@ import Predictor.weather_measurements as wm
 import numpy as np
 import skops.io
 import dask.dataframe as dd
+from datetime import datetime
+import pandas as pd
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -70,10 +72,13 @@ for broker in kafka_brokers:
     producers[broker] = initialize_kafka_producer(broker)
 
 # Configure the weather station codes to get the weather predictions
-station_code1 = "T0409" #Trento
-station_code2 = "T0147" #Rovereto
-station_code3 = "T0367" #Cavalese
-station_code4 = "T0179" #Tione
+area_to_station_code = {
+    1: "T0409",  # Trento
+    2: "T0147",  # Rovereto
+    3: "T0367",  # Cavalese
+    4: "T0179"   # Tione
+}
+
 
 def send_to_kafka(building, prediction, area):
     try:
@@ -98,35 +103,45 @@ def process():
             # Retrieve the latest data for the key
             data = r.lrange(key, 0, 3)  # Get the most recent entry
             
-            latest = data[-1]
+            latest = json.loads(data[-1].decode('utf-8'))
             building = latest['building'] #Building ID
             timestamp = latest['timestamp'] #Timestamp
+            dt_object = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S")
+            hour = dt_object.hour
             meter_reading = latest['meter_reading'] #Meter reading of the previous hour
 
-            building_info = r.get(building)
-            area = building_info['area'] #Square feet
-            year = building_info['year']
+            building_info = json.loads(r.get(building).decode('utf-8'))
+            area = building_info['area'] 
+            year = building_info['year_built']
+            square_feet = building_info['square feet']
 
             # Retrieve all weather measurements data via the Provincia API
-            area_weather = wm.get_latest_measurements(f"station_code{area}")
-            temp = area_weather['temperature']
+            area_weather = wm.get_latest_measurements(area_to_station_code[area])
+            temp = area_weather['avg_temp']
             precipitations = area_weather['precipitations']
 
-            past_reading1 = data[-2]['meter_reading']
-            past_reading2 = data[-3]['meter_reading']
+            past_reading1 = json.loads(data[-2].decode('utf-8'))['meter_reading']
+            past_reading2 = json.loads(data[-3].decode('utf-8'))['meter_reading']
             
-            input = dd({
-                'hour': timestamp.hour,
+            # Create a list of dictionaries (your data)
+            data_list = [{
+                'timestamp': hour,
                 'meter_reading': meter_reading,
-                'square_feet': area,
+                'square_feet': square_feet,
                 'year_built': year,
                 'air_temperature': temp,
                 'precip_depth_1_hr': precipitations,
-                'meter_reading_1h': past_reading1,
-                'meter_reading_2h': past_reading2
-            }, npartitions=1)
+                'met-1': past_reading1,
+                'met-2': past_reading2
+            }]
 
-            prediction = RFModel(input)
+            # Create Pandas DataFrame from list of dictionaries
+            pandas_df = pd.DataFrame(data_list)
+
+            # Create Dask DataFrame from Pandas DataFrame
+            dask_df = dd.from_pandas(pandas_df, npartitions=1)
+
+            prediction = RFModel(dask_df.compute())
 
             if prediction:
                 log.info(f"Received building data from Redis: {key}")

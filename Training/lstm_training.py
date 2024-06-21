@@ -5,6 +5,7 @@ from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import seaborn as sns
 import skops.io
+import numpy as np
 
 
 # Read the dataframes as Dask Dataframes
@@ -59,18 +60,17 @@ for index, row in df.iterrows():
 df.timestamp = df.timestamp.dt.hour
 
 # Insert the previous two metric readings
-dfrf = df
-dfrf.insert(len(dfrf.columns)-1, 'met-2', 0)
-dfrf.insert(len(dfrf.columns)-1, 'met-1', 0)
+df.insert(len(df.columns)-1, 'met-2', 0)
+df.insert(len(df.columns)-1, 'met-1', 0)
 
-for index, row in dfrf.iterrows():
+for index, row in df.iterrows():
     if (index%5880 not in [0,1]):
-        dfrf.at[index, "met-2"] = dfrf.at[index-2, "meter_reading"]
-        dfrf.at[index, "met-1"] = dfrf.at[index-1, "meter_reading"]
+        df.at[index, "met-2"] = df.at[index-2, "meter_reading"]
+        df.at[index, "met-1"] = df.at[index-1, "meter_reading"]
 
 # Feature selection
 col_to_keep = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11]
-dfrf = dfrf.iloc[:, col_to_keep]
+dfrf = df.iloc[:, col_to_keep]
 
 # Random forest instantiation and training
 clf = RandomForestRegressor(n_estimators=200, random_state=42)

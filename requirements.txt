@@ -11,3 +11,4 @@ dask[dataframe]
 skops
 seaborn
 scikit-learn
+matplotlib

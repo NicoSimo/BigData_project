@@ -4,8 +4,12 @@ import Consumers.postgre_consumer as postgre_consumer
 import Energy_consumption_sensors.sensor_scheduler as sensor_scheduler
 import Predictor.prevision_processing as prevision_processing
 import Predictor.weather_measurements as wm
+import Setup.buildings_info
 
 def run_all():
+    #Setup
+    Setup.buildings_info.buildings_loader()  #Upload building information to redis
+
     # Start Kafka to Redis consumer
     kafka_redis_thread = threading.Thread(target=redis_consumer.run_redis_consumer)
     kafka_redis_thread.start()

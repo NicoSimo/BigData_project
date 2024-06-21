@@ -6,7 +6,7 @@ import logging
 import json
 import time
 import weather_measurements as wm
-import skops.io
+from rf_training import RFCaller
 import numpy as np
 
 # Configure logging
@@ -31,7 +31,7 @@ pubsub = r.pubsub()
 pubsub.subscribe('data_updates')
 
 # Load ML model
-model = skops.io.load("rf.skops")
+model = RFCaller()
 
 producers = {}
 

@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import skops.io
 
+
 # Read the dataframes as Dask Dataframes
 df1 = dd.read_csv("historical_consumptions.csv")
 df2 = dd.read_csv("historical_weather.csv")

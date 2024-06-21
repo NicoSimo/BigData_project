@@ -1,6 +1,7 @@
 import redis
 from kafka import KafkaProducer
 from kafka.errors import NoBrokersAvailable
+import random
 import os
 import logging
 import json
@@ -76,12 +77,17 @@ station_code4 = "T0179" #Tione
 
 def send_to_kafka(building, prediction, area):
     try:
-        for broker, producer in producers.items():
-            producer.send(topic_name, {building: prediction})
-            producer.flush()
-            producer.send(area_topics[area], {building: prediction})
-            producer.flush()
-            log.info(f"Sent to Kafka topic {topic_name}: {building} - {prediction}")
+        # Select one random producer from the producers dictionary
+        broker = random.choice(list(producers.keys()))
+        producer = producers[broker]
+
+        # Send the message to the Kafka topic
+        producer.send(topic_name, {building: prediction})
+        producer.flush()
+        producer.send(area_topics[area], {building: prediction})
+        producer.flush()
+        
+        log.info(f"Sent to Kafka topic {topic_name}: {building} - {prediction} via broker {broker}")
     except Exception as e:
         log.error(f"Failed to send message to Kafka: {e}")
 

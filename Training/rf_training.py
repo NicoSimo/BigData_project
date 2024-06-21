@@ -85,5 +85,5 @@ print("Mean Squared Error: ", mse)
 #sns.scatterplot(x=y_pred, y=dfrf.iloc[:,-1])
 #plt.show()
 
-# Save the model
-skops.io.dump(clf, "/Predictor/rf.skops")
+# Save the model (too heavy)
+#skops.io.dump(clf, "/Predictor/rf.skops")

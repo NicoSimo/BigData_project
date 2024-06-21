@@ -5,9 +5,9 @@ import os
 import logging
 import json
 import time
-import weather_measurements as wm
+import Predictor.weather_measurements as wm
+from Predictor.rf_training import RFCaller
 import numpy as np
-import skops.io
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -31,7 +31,7 @@ pubsub = r.pubsub()
 pubsub.subscribe('data_updates')
 
 # Load ML model
-model = skops.io.load("rf.skops")
+model = RFCaller()
 
 producers = {}
 
@@ -39,7 +39,7 @@ def RFModel(input):
 
     # PREPROCESSING DEI DATI PERCHE' NON SO COME ARRIVINO
     """INPUT: Dask Dataframe con colonne:
-    ora del giorno, meter_reading, square_feet, year_built, air_temperature,
+    ora del giorno, meter_reading, square_feet, year_built, air_temperature, cloud_coverage,
     precip_depth_1_hr, meter_reading di due ore prima, meter_reading di un'ora prima
 
     OUTPUT: numpy array di dimensione (inputs_row, 1)

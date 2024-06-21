@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import seaborn as sns
-import skops.io
+import joblib
 import numpy as np
 
 
@@ -86,4 +86,4 @@ print("Mean Squared Error: ", mse)
 #plt.show()
 
 # Save the model
-skops.io.dump(clf, "/Predictor/rf.skops")
+joblib.dump(clf, "/Predictor/rf.joblib")

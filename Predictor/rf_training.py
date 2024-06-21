@@ -4,7 +4,6 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import seaborn as sns
-import skops.io
 import numpy as np
 
 def RFCaller():
@@ -87,5 +86,3 @@ def RFCaller():
 #sns.scatterplot(x=y_pred, y=dfrf.iloc[:,-1])
 #plt.show()
 
-# Save the model (too heavy)
-#skops.io.dump(clf, "/Predictor/rf.skops")

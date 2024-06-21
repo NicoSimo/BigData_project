@@ -6,7 +6,7 @@ import logging
 import json
 import time
 import weather_measurements as wm
-import joblib
+import skops.io
 import numpy as np
 
 # Configure logging
@@ -31,7 +31,7 @@ pubsub = r.pubsub()
 pubsub.subscribe('data_updates')
 
 # Load ML model
-model = joblib.load("rf.joblib")
+model = skops.io.load("rf.skops")
 
 producers = {}
 

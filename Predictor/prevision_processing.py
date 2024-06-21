@@ -8,6 +8,7 @@ import time
 import Predictor.weather_measurements as wm
 import numpy as np
 import skops.io
+import dask.dataframe as dd
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -69,7 +70,7 @@ for broker in kafka_brokers:
 # Configure the weather station codes to get the weather predictions
 station_code1 = "T0409" #Trento
 station_code2 = "T0147" #Rovereto
-station_code3 = "T0392" #Borgo Valsugana
+station_code3 = "T0367" #Cavalese
 station_code4 = "T0179" #Tione
 
 def send_to_kafka(message):
@@ -87,6 +88,8 @@ def process():
             key = message['data'].decode('utf-8')
             # Retrieve the latest data for the key
             latest_data = r.lrange(key, 0, 0)  # Get the most recent entry
+
+            
 
             # Retrieve all weather measurements data via the Provincia API
             area1_pred = wm.get_latest_measurements(station_code1)

@@ -31,7 +31,7 @@ pubsub = r.pubsub()
 pubsub.subscribe('data_updates')
 
 # Load ML model
-model = skops.io.load("rf.skops")
+model = skops.io.load("Predictor/rf.skops")
 
 producers = {}
 

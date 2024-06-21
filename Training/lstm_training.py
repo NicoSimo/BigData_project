@@ -1,48 +1,11 @@
-import torch
-import torch.nn as nn
-import torch.optim as optim
-from torch.utils.data import DataLoader, Dataset
-from tqdm import tqdm
 import dask.dataframe as dd
 import pandas as pd
-import numpy as np
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error
+import matplotlib.pyplot as plt
+import seaborn as sns
+import skops.io
 
-# Class to convert the Dask Dataframe into a Tensor Dataframe
-class EnergyDataset(Dataset):
-    def __init__(self, dataframe, sequence_length):
-        self.dataframe = dataframe
-        self.sequence_length = sequence_length
-
-    def __len__(self):
-        return len(self.data) - self.sequence_length
-
-    def __getitem__(self, idx):
-        sequence = self.data[idx: idx + self.sequence_length, :-1]
-        target = self.data[idx+self.sequence_length, -1]
-        sequence = np.array(sequence).reshape((self.sequence_length, -1))
-        target = np.array(target).reshape((1, -1))
-        return sequence, target
-        
-
-# Deep Learning Model
-class LSTMModel(nn.Module):
-    def __init__(self, input_size, hidden_size, num_layers, output_size):
-        super(LSTMModel, self).__init__()
-        self.hidden_size = hidden_size
-        self.num_layers = num_layers
-        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
-        self.nl = nn.LeakyReLU()
-        self.fc = nn.Linear(hidden_size, output_size)
-
-
-    def forward(self, x):
-        h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
-        c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
-        out, (hn, cn) = self.lstm(x, (h0.detach(), c0.detach()))
-        out = self.nl(out[:, -1, :])
-        out = self.nl(out)
-        out = self.fc(out)
-        return out
 
 # Read the dataframes as Dask Dataframes
 df1 = dd.read_csv("historical_consumptions.csv")
@@ -95,49 +58,32 @@ for index, row in df.iterrows():
 # We are only interested in the hour of the day
 df.timestamp = df.timestamp.dt.hour
 
-# Features selection
-col_to_keep = [1, 2, 4, 5, 6, 7, 8, 9]
-dfn = df.iloc[:,col_to_keep]
+# Insert the previous two metric readings
+dfrf = df
+dfrf.insert(len(dfrf.columns)-1, 'met-2', 0)
+dfrf.insert(len(dfrf.columns)-1, 'met-1', 0)
 
-# Preprocessing
-train_data = EnergyDataset(dfn, sequence_length=3)
-trainloader = DataLoader(train_data, batch_size=5880, shuffle=False)
+for index, row in dfrf.iterrows():
+    if (index%5880 not in [0,1]):
+        dfrf.at[index, "met-2"] = dfrf.at[index-2, "meter_reading"]
+        dfrf.at[index, "met-1"] = dfrf.at[index-1, "meter_reading"]
 
-# Model instantiation
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = LSTMModel(7, 20, 2, 1)
-model.to(device)
+# Feature selection
+col_to_keep = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11]
+dfrf = dfrf.iloc[:, col_to_keep]
 
-# Define optimizer
-optimizer = optim.AdamW(model.parameters(), lr=1, weight_decay=1e-2)
-# Define learning rate scheduler
-scheduler = optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.8)
+# Random forest instantiation and training
+clf = RandomForestRegressor(n_estimators=100, random_state=42)
+clf.fit(dfrf.iloc[:,:-1], dfrf.iloc[:,-1])
 
-# Define loss
-criterion = nn.MSELoss()
-for epoch in range(20):
-    # Train
-    model.train()
-    with tqdm(trainloader) as pbar:
-        for i, (data, targets) in enumerate(pbar):
-            # The last 3 are removed as we do not know the predictions
-            data = data[:-3, :, :]
-            targets = targets[:-3, :, :]
-            data = data.to(device)
-            # Conversions needed for the model
-            data = data.to(torch.float32)
-            targets = targets.to(torch.float32)
+# Prediction of the training set
+y_pred = clf.predict(dfrf.iloc[:,:-1])
+mse = mean_squared_error(dfrf.iloc[:,-1], y_pred)
+print("Mean Squared Error: ", mse)
 
-            optimizer.zero_grad()
-            output = model(data)
-            loss = criterion(output, targets.to(device))
-            loss.backward()
-            optimizer.step()
-            # Print learning rate and average loss per batch
-            pbar.set_postfix(loss=loss.item()/5877, lr=optimizer.param_groups[0]['lr'])
+# Plot
+#sns.scatterplot(x=y_pred, y=dfrf.iloc[:,-1])
+#plt.show()
 
-    # Update learning rate
-    scheduler.step()
-
-    # Save the model
-    torch.save(model, "/Predictor/lstm.pt")
+# Save the model
+skops.io.dump(clf, "/Predictor/rf.skops")

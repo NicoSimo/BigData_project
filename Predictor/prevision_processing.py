@@ -25,6 +25,7 @@ log.addHandler(file_handler)
 redis_host = os.getenv('REDIS_HOST', 'redis')
 kafka_brokers = os.getenv('KAFKA_BROKER', 'kafka1:9092,kafka2:9093,kafka3:9094,kafka4:9095').split(',')
 topic_name = 'energy_consumption_predictions'
+area_topics = {1: 'trento', 2: 'rovereto', 3: 'cavalese', 4: 'tione'}
 
 # Initialize Redis and Kafka producers
 r = redis.Redis(host=redis_host, port=6379, db=0)
@@ -73,12 +74,14 @@ station_code2 = "T0147" #Rovereto
 station_code3 = "T0367" #Cavalese
 station_code4 = "T0179" #Tione
 
-def send_to_kafka(message):
+def send_to_kafka(building, prediction, area):
     try:
         for broker, producer in producers.items():
-            producer.send(topic_name, message)
+            producer.send(topic_name, {building: prediction})
             producer.flush()
-            log.info(f"Sent to Kafka topic {topic_name}: {message}")
+            producer.send(area_topics[area], {building: prediction})
+            producer.flush()
+            log.info(f"Sent to Kafka topic {topic_name}: {building} - {prediction}")
     except Exception as e:
         log.error(f"Failed to send message to Kafka: {e}")
 
@@ -87,23 +90,41 @@ def process():
         if message['type'] == 'message':
             key = message['data'].decode('utf-8')
             # Retrieve the latest data for the key
-            latest_data = r.lrange(key, 0, 0)  # Get the most recent entry
-
+            data = r.lrange(key, 0, 3)  # Get the most recent entry
             
+            latest = data[-1]
+            building = latest['building'] #Building ID
+            timestamp = latest['timestamp'] #Timestamp
+            meter_reading = latest['meter_reading'] #Meter reading of the previous hour
+
+            building_info = r.get(building)
+            area = building_info['area'] #Square feet
+            year = building_info['year']
 
             # Retrieve all weather measurements data via the Provincia API
-            area1_pred = wm.get_latest_measurements(station_code1)
-            area2_pred = wm.get_latest_measurements(station_code2)
-            area3_pred = wm.get_latest_measurements(station_code3)
-            area4_pred = wm.get_latest_measurements(station_code4)
+            area_weather = wm.get_latest_measurements(f"station_code{area}")
+            temp = area_weather['temperature']
+            precipitations = area_weather['precipitations']
 
-            #QUA CI VA LA ROBA CHE EFFETTIVAMENTE FA LE PREVISIONI
-            prevision = RFModel(...)
+            past_reading1 = data[-2]['meter_reading']
+            past_reading2 = data[-3]['meter_reading']
+            
+            input = dd({
+                'hour': timestamp.hour,
+                'meter_reading': meter_reading,
+                'square_feet': area,
+                'year_built': year,
+                'air_temperature': temp,
+                'precip_depth_1_hr': precipitations,
+                'meter_reading_1h': past_reading1,
+                'meter_reading_2h': past_reading2
+            }, npartitions=1)
 
-            if latest_data:
-                data = latest_data[0].decode('utf-8')
-                log.info(f"Received message from Redis: {data}")
-                send_to_kafka(data)
+            prediction = RFModel(input)
+
+            if prediction:
+                log.info(f"Received building data from Redis: {key}")
+                send_to_kafka(building, prediction, area)
 
 if __name__ == '__main__':
     process()

@@ -73,7 +73,7 @@ col_to_keep = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11]
 dfrf = dfrf.iloc[:, col_to_keep]
 
 # Random forest instantiation and training
-clf = RandomForestRegressor(n_estimators=100, random_state=42)
+clf = RandomForestRegressor(n_estimators=200, random_state=42)
 clf.fit(dfrf.iloc[:,:-1], dfrf.iloc[:,-1])
 
 # Prediction of the training set

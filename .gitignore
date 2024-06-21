@@ -2,3 +2,7 @@ myenv/
 POSTGRE_TABLES.pdf
 app.log
 postgres_data.tar.gz
+Consumers/__pycache__/
+Energy_consumption_sensors/__pycache__/
+Predictions/__pycache__/
+Sensor_core/__pycache__/

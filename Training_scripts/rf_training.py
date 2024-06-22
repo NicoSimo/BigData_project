@@ -87,4 +87,3 @@ clf.fit(dfrf.iloc[:,:-1], dfrf.iloc[:,-1])
 
 # Save model
 skops.io.dump(clf, "/Predictor/rf.skops")
-

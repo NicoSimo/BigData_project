@@ -131,8 +131,9 @@ def process():
                 'year_built': year,
                 'air_temperature': temp,
                 'precip_depth_1_hr': precipitations,
+                'met-2': past_reading2,
                 'met-1': past_reading1,
-                'met-2': past_reading2
+
             }]
 
             # Create Pandas DataFrame from list of dictionaries
@@ -141,7 +142,7 @@ def process():
             # Create Dask DataFrame from Pandas DataFrame
             dask_df = dd.from_pandas(pandas_df, npartitions=1)
 
-            prediction = RFModel(dask_df.compute())
+            prediction = float(RFModel(dask_df.compute()))
 
             if prediction:
                 log.info(f"Received building data from Redis: {key}")

@@ -102,9 +102,9 @@ def run_sensor_scheduler():
         time.sleep(5)
 
     # Create topic with specified partitions and replication factor if it doesn't exist
-    topic_name_postgre = 'energy_consumption_postgre'
-    topic_name_redis = 'energy_consumption_redis'
-    
+    topic_name_postgre = os.getenv('KAFKA_TOPIC_POSTGRE', 'energy_consumption_postgre')
+    topic_name_redis = os.getenv('KAFKA_TOPIC_REDIS', 'energy_consumption_redis')
+
     num_partitions = 5
     replication_factor = 3
 

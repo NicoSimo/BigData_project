@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 
 def run_redis_consumer():
     # Kafka setup
-    topic_name = 'energy_consumption_topic'
+    topic_name = 'energy_consumption_redis'
     kafka_brokers = os.getenv('KAFKA_BROKER', 'kafka1:9092,kafka2:9093,kafka3:9094,kafka4:9095').split(',')
 
     # Redis setup

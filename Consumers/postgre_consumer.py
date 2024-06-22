@@ -17,9 +17,9 @@ def run_postgre_consumer():
     kafka_brokers = os.getenv('KAFKA_BROKER', 'kafka1:9092,kafka2:9093,kafka3:9094,kafka4:9095').split(',')
 
     # PostgreSQL setup
-    postgre_host = os.getenv('POSTGRES_HOST', 'postgres')
-    postgre_user = os.getenv('POSTGRES_USER', 'postgres')
-    postgre_password = os.getenv('POSTGRES_PASSWORD', 'Team3')
+    postgre_host = os.getenv('POSTGRE_HOST', 'postgres')
+    postgre_user = os.getenv('DATABASE_USER', 'postgres')
+    postgre_password = os.getenv('DATABASE_PASSWORD', 'Team3')
     postgre_db = os.getenv('DATABASE_NAME', 'testdb')
 
     # Retry mechanism to wait for Kafka broker

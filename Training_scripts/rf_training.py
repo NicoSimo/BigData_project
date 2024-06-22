@@ -8,13 +8,53 @@ import numpy as np
 import skops.io
 import time
 import os
+import psycopg2
+
 import logging
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
+def fetch_data():
+    """
+    Fetch data from PostgreSQL and write to CSV.
+    """
+    
+    postgre_host = os.getenv('POSTGRES_HOST', 'postgres')
+    postgre_user = os.getenv('POSTGRES_USER', 'postgres')
+    postgre_password = os.getenv('POSTGRES_PASSWORD', 'Team3')
+    postgre_db = os.getenv('DATABASE_NAME', 'testdb')
+    table_name = 'sensor_data'
+    
+    connection = None
+    try:
+        # Connect to your PostgreSQL database
+        connection_string = f"dbname='{postgre_db}' user='{postgre_user}' host='{postgre_host}' password='{postgre_password}'"
+        connection = psycopg2.connect(connection_string)
+        cursor = connection.cursor()
+
+        # Execute a query
+        cursor.execute(f"SELECT * FROM {table_name};")
+        rows = cursor.fetchall()
+
+        # Write to CSV
+        with open('Training_scripts/Training/historical_consumptions_updated.csv', 'w') as f:
+            for row in rows:
+                f.write(",".join(str(item) for item in row) + "\n")
+
+        log.info("Data fetched and written to CSV successfully.")
+    except Exception as e:
+        log.error(f"Database fetch error: {e}")
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
+
 def train_model():
   try:
+    # Fetch data from PostgreSQL
+    fetch_data()
+
     # Read the dataframes as Dask Dataframes
     df1 = dd.read_csv("Training_scripts/Training/historical_consumptions.csv")
     df2 = dd.read_csv("Training_scripts/Training/historical_weather.csv")
@@ -101,13 +141,11 @@ def train_model():
     log.warn(f"An error occurred during model training: {e}")
 
 def run_training():
-  RETRAIN_TIME = int(os.getenv('RETRAIN_TIME', 100))
-  log.info(f"Starting training script with retrain time of {RETRAIN_TIME} seconds")
-  
+
+  RETRAIN_TIME = int(os.getenv('RETRAIN_TIME', 100))  
   while True:
     # Retrain the model every RETRAIN_TIME seconds
     train_model()
-    log.info(f"Training completed. Waiting for {RETRAIN_TIME} seconds before next training.")
     time.sleep(RETRAIN_TIME)
     
     

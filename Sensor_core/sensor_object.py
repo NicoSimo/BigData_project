@@ -17,15 +17,16 @@ class Sensor:
         log.info(f"Sensor initialized for building_id: {building_id} using topic: {topic}")
 
     def send_data(self):
-        for _, row in self.data.iterrows():
-            message = {
-                'building_id': int(self.building_id),
-                'timestamp': row['timestamp'].isoformat(),
-                'meter_reading': float(row['meter_reading'])
-            }
-            try:
+        try:
+            for _, row in self.data.iterrows():
+                message = {
+                    'building_id': int(self.building_id),
+                    'timestamp': row['timestamp'].isoformat(),
+                    'meter_reading': float(row['meter_reading'])
+                }
+            
                 self.producer.send(self.topic, value=message)
-                self.producer.flush()
                 log.info(f"Sent message: {message}")
-            except Exception as e:
-                log.error(f"Failed to send message for building_id {self.building_id}: {e}")
+            self.producer.flush()    
+        except Exception as e:
+            log.error(f"Failed to send message for building_id {self.building_id}: {e}")

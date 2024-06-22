@@ -13,7 +13,6 @@ log = logging.getLogger(__name__)
 def run_redis_consumer():
     # Kafka setup
     topic_name = os.getenv('KAFKA_TOPIC_REDIS', 'energy_consumption_redis')
-
     kafka_brokers = os.getenv('KAFKA_BROKER', 'kafka1:9092,kafka2:9093,kafka3:9094,kafka4:9095').split(',')
 
     # Redis setup
@@ -25,7 +24,7 @@ def run_redis_consumer():
             consumer = KafkaConsumer(
                 bootstrap_servers=kafka_brokers, 
                 auto_offset_reset='earliest', 
-                group_id='energy_consumption' # The consumer group ID
+                group_id='energy_consumption_redis' # The consumer group ID
             )
             consumer.subscribe(topic_name)
             log.debug(f"Redis Subscribed to topic '{topic_name}'")

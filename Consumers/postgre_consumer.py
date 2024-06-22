@@ -20,7 +20,7 @@ def run_postgre_consumer():
     postgre_host = os.getenv('POSTGRES_HOST', 'postgres')
     postgre_user = os.getenv('POSTGRES_USER', 'postgres')
     postgre_password = os.getenv('POSTGRES_PASSWORD', 'Team3')
-    postgre_db = os.getenv('POSTGRES_DATABASE', 'testdb')
+    postgre_db = os.getenv('DATABASE_NAME', 'testdb')
 
     # Retry mechanism to wait for Kafka broker
     while True:
@@ -30,7 +30,7 @@ def run_postgre_consumer():
                 topic_name,
                 bootstrap_servers=kafka_brokers,
                 auto_offset_reset='earliest',
-                group_id='energy_consumption',
+                group_id='energy_consumption_postgre',
                 enable_auto_commit=False  # Disable auto commit to manage offsets manually
             )
             log.debug("Kafka consumer initialized")
@@ -60,17 +60,19 @@ def run_postgre_consumer():
         except Exception as e:
             log.error(f"Failed to connect to PostgreSQL: {e}")
             time.sleep(5)
-    
+
     # Batch processing configuration
     batch_size = 25 * int(os.getenv('BATCH_SIZE',3))
     batch = []
 
     log.debug("Starting to consume messages from Kafka topic")
 
+    update_time = int(os.getenv('UPDATE_TIME', 60))
+
     while True:
         try:
             # Poll for new messages from Kafka with a longer timeout
-            raw_messages = consumer.poll(timeout_ms=60000)  # 60 seconds timeout
+            raw_messages = consumer.poll(timeout_ms=update_time*1000)  # 60 seconds timeout
             if not raw_messages:
                 log.debug("No messages received in this poll")
 

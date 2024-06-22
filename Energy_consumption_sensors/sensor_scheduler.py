@@ -33,7 +33,6 @@ def check_kafka_connectivity(kafka_brokers):
         try:
             kafka_host, kafka_port = broker.split(':')
             with socket.create_connection((kafka_host, int(kafka_port)), timeout=5) as sock:
-                log.info(f"Successfully connected to Kafka at {kafka_host}:{kafka_port}")
                 return True
         except socket.error as err:
             log.warning(f"Failed to connect to Kafka at {kafka_host}:{kafka_port} - {err}")
@@ -54,11 +53,12 @@ def create_topic(topic_name, num_partitions, replication_factor, kafka_brokers, 
         if retention_ms is not None:
             config_resource = ConfigResource(ConfigResourceType.TOPIC, topic_name)
             configs = {'retention.ms': str(retention_ms)}
-            try:
-                admin_client.alter_configs({config_resource: configs})
-                log.info(f"Updated retention.ms for topic '{topic_name}' to {retention_ms} ms.")
-            except Exception as e:
-                log.error(f"Error updating retention.ms for topic '{topic_name}': {e}")
+            if configs:  # Ensure configs is not None or empty
+                try:
+                    admin_client.alter_configs({config_resource: configs})
+                    log.info(f"Updated retention.ms for topic '{topic_name}' to {retention_ms} ms.")
+                except Exception as e:
+                    log.error(f"Error updating retention.ms for topic '{topic_name}': {e}")
         return
 
     topic_list = [NewTopic(name=topic_name, num_partitions=num_partitions, replication_factor=replication_factor)]
@@ -68,13 +68,15 @@ def create_topic(topic_name, num_partitions, replication_factor, kafka_brokers, 
         if retention_ms is not None:
             config_resource = ConfigResource(ConfigResourceType.TOPIC, topic_name)
             configs = {'retention.ms': str(retention_ms)}
-            try:
-                admin_client.alter_configs({config_resource: configs})
-                log.info(f"Set retention.ms for topic '{topic_name}' to {retention_ms} ms.")
-            except Exception as e:
-                log.error(f"Error setting retention.ms for topic '{topic_name}': {e}")
+            if configs:  # Ensure configs is not None or empty
+                try:
+                    admin_client.alter_configs({config_resource: configs})
+                    log.info(f"Set retention.ms for topic '{topic_name}' to {retention_ms} ms.")
+                except Exception as e:
+                    log.error(f"Error setting retention.ms for topic '{topic_name}': {e}")
     except Exception as e:
         log.error(f"Error creating topic '{topic_name}': {e}")
+
 
 def assign_broker_to_site(site_id, site_to_broker):
     if site_id not in site_to_broker:

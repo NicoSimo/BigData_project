@@ -2,6 +2,10 @@ import csv
 import os
 import redis
 import json
+import logging
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
 
 def buildings_loader():
     redis_host = os.getenv('REDIS_HOST', 'redis')
@@ -19,6 +23,7 @@ def buildings_loader():
             }
             # Use the Redis `set` command
             r.set(key, json.dumps(value))
+    log.info(f"Building data loaded into Redis.")   
 
 if __name__ == '__main__':
     buildings_loader()

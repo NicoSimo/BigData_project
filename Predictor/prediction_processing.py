@@ -119,9 +119,14 @@ def process():
             area_weather = wm.get_latest_measurements(area_to_station_code[area])
             temp = area_weather['avg_temp']
             precipitations = area_weather['precipitations']
-
-            past_reading1 = json.loads(data[-2].decode('utf-8'))['meter_reading']
-            past_reading2 = json.loads(data[-3].decode('utf-8'))['meter_reading']
+            if len(data) == 1:          ### This is just to avoid errors in the first two iterations, while running normally this will not be needed
+                past_reading1 = meter_reading
+                past_reading2 = meter_reading
+            elif len(data) == 2:
+                past_reading2 = meter_reading
+            else:
+                past_reading1 = json.loads(data[-2].decode('utf-8'))['meter_reading']
+                past_reading2 = json.loads(data[-3].decode('utf-8'))['meter_reading']
             
             # Create a list of dictionaries (your data)
             data_list = [{
@@ -133,9 +138,6 @@ def process():
                 'precip_depth_1_hr': precipitations,
                 'met-2': past_reading2,
                 'met-1': past_reading1,
-
-                'met-2': past_reading2,
-                'met-1': past_reading1
             }]
 
             # Create Pandas DataFrame from list of dictionaries

@@ -41,13 +41,11 @@ model = skops.io.load("Predictor/rf.skops")
 producers = {}
 
 def RFModel(input):
-
-    # PREPROCESSING DEI DATI PERCHE' NON SO COME ARRIVINO
     """INPUT: Dask Dataframe con colonne:
-    ora del giorno, meter_reading, square_feet, year_built, air_temperature, cloud_coverage,
-    precip_depth_1_hr, meter_reading di due ore prima, meter_reading di un'ora prima
+    ora del giorno, meter_reading, square_feet, year_built, air_temperature, precip_depth_1_hr,
+    meter_reading di due ore prima (met-2), meter_reading di un'ora prima (met-1)
 
-    OUTPUT: numpy array di dimensione (inputs_row, 1)
+    OUTPUT: numpy array di dimensione (inputs_row)
     """
 
     pred = model.predict(input)
@@ -134,6 +132,8 @@ def process():
                 'met-2': past_reading2,
                 'met-1': past_reading1,
 
+                'met-2': past_reading2,
+                'met-1': past_reading1
             }]
 
             # Create Pandas DataFrame from list of dictionaries

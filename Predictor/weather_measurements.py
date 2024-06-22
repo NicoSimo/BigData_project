@@ -20,7 +20,3 @@ def get_latest_measurements(station_code, count=4):
 
     #I understand that this is brute force but i couldn't understand the XML structure
     return {'avg_temp' : mean(temperatures_list), 'precipitations' : sum(precip_list) }
-
-
-
-get_latest_measurements("T0179")

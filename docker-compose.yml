@@ -6,6 +6,7 @@ services:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
+      DATABASE_NAME: ${DATABASE_NAME}
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
@@ -126,6 +127,8 @@ services:
 
   main_app:
     container_name: main_app
+    env_file: 
+      - ./.env
     build:
       context: .
       dockerfile: Dockerfile
@@ -136,17 +139,7 @@ services:
       - kafka4
       - redis
       - postgres
-    environment:
-      - KAFKA_BROKER=${KAFKA_BROKER}
-      - KAFKA_TOPIC=${KAFKA_TOPIC}
-      - KAFKA_TOPIC_2=${KAFKA_TOPIC_2}
-      - KAFKA_TOPIC_3=${KAFKA_TOPIC_3}
-      - KAFKA_TOPIC_4=${KAFKA_TOPIC_4}
-      - KAFKA_TOPIC_5=${KAFKA_TOPIC_5}
-      - KAFKA_TOPIC_6=${KAFKA_TOPIC_6}
-      - REDIS_HOST=${REDIS_HOST}
-      - POSTGRES_HOST=${POSTGRE_HOST}
-      - UPDATE_TIME=${UPDATE_TIME}
+    
     volumes:
       - main-app-data:/app/data
       - ${LOCAL_DATA_PATH}:/app/new_data

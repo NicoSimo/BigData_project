@@ -129,8 +129,8 @@ def process():
                 'year_built': year,
                 'air_temperature': temp,
                 'precip_depth_1_hr': precipitations,
-                'met-1': past_reading1,
-                'met-2': past_reading2
+                'met-2': past_reading2,
+                'met-1': past_reading1
             }]
 
             # Create Pandas DataFrame from list of dictionaries

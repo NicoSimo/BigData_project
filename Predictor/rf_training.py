@@ -8,9 +8,9 @@ import numpy as np
 
 def RFCaller():
     # Read the dataframes as Dask Dataframes
-    df1 = dd.read_csv("Training/historical_consumptions.csv")
-    df2 = dd.read_csv("Training/historical_weather.csv")
-    df3 = dd.read_csv("Training/building_data.csv")
+    df1 = dd.read_csv("Predictor/Training/historical_consumptions.csv")
+    df2 = dd.read_csv("Predictor/Training/historical_weather.csv")
+    df3 = dd.read_csv("Predictor/Training/building_data.csv")
 
     # Merge to obtain building information
     df1 = df1.merge(df3, how="left", on="building_id").compute()

@@ -6,6 +6,7 @@ services:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
@@ -138,11 +139,13 @@ services:
       - postgres
     environment:
       - KAFKA_BROKER=${KAFKA_BROKER}
-      - KAFKA_TOPIC=${KAFKA_TOPIC}
-      - KAFKA_TOPIC_2=${KAFKA_TOPIC_2}
+      - KAFKA_TOPIC_REDIS=${KAFKA_TOPIC_REDIS}
+      - KAFKA_TOPIC_POSTGRE=${KAFKA_TOPIC_POSTGRE}
+      - KAFKA_TOPIC_PREDICTION=${KAFKA_TOPIC_PREDICTION}
       - REDIS_HOST=${REDIS_HOST}
       - POSTGRES_HOST=${POSTGRE_HOST}
       - UPDATE_TIME=${UPDATE_TIME}
+      - BATCH_SIZE=${BATCH_SIZE}
     volumes:
       - main-app-data:/app/data
       - ${LOCAL_DATA_PATH}:/app/new_data

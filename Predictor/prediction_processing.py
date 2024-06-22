@@ -87,10 +87,12 @@ def send_to_kafka(building, prediction, area):
         # Send the message to the Kafka topic
         producer.send(topic_name, {building: prediction})
         producer.flush()
+        log.info(f"Sent to Kafka topic {topic_name}: {building} - {prediction} via broker {broker}")
         producer.send(area_topics[area], {building: prediction})
+        log.info(f"Sent to Kafka topic {area_topics[area]}: {building} - {prediction} via broker {broker}")
         producer.flush()
         
-        log.info(f"Sent to Kafka topic {topic_name}: {building} - {prediction} via broker {broker}")
+        
     except Exception as e:
         log.error(f"Failed to send message to Kafka: {e}")
 

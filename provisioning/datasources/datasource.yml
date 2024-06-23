@@ -5,9 +5,9 @@ datasources:
   type: postgres
   access: proxy
   url: ${POSTGRE_HOST}:5432
-  database: ${DATABASE_NAME}
-  user: ${DATABASE_USER}
+  database: ${POSTGRES_DB}
+  user: ${POSTGRES_USER}
   secureJsonData:
-    password: ${DATABASE_PASSWORD}
+    password: ${POSTGRES_PASSWORD}
   jsonData:
     sslmode: disable

@@ -139,7 +139,6 @@ services:
       - kafka4
       - redis
       - postgres
-    
     volumes:
       - main-app-data:/app/data
       - ${LOCAL_DATA_PATH}:/app/new_data
@@ -147,6 +146,24 @@ services:
     networks:
       - backend
       - frontend
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana.ini:/etc/grafana/grafana.ini
+      - ./provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./provisioning/datasources:/etc/grafana/provisioning/datasources
+    env_file: 
+      - ./grafana.env  
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - postgres
 
 volumes:
   postgres-data:
@@ -156,6 +173,7 @@ volumes:
   kafka-data4:
   redis-data:
   main-app-data:
+  grafana-data:
 
 networks:
   backend:

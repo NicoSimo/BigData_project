@@ -22,7 +22,7 @@ def run_postgre_consumer():
     postgre_host = os.getenv('POSTGRE_HOST', 'postgres')
     postgre_user = os.getenv('DATABASE_USER', 'postgres')
     postgre_password = os.getenv('DATABASE_PASSWORD', 'Team3')
-    postgre_db = os.getenv('DATABASE_NAME', 'tdb')
+    postgre_db = os.getenv('DATABASE_NAME', 'energy_consumption')
 
     # Retry mechanism to wait for Kafka broker
     while True:

@@ -42,7 +42,7 @@ producers = {}
 
 def RFModel(input):
     """INPUT: Dask Dataframe con colonne:
-    ora del giorno, meter_reading, square_feet, year_built, air_temperature, precip_depth_1_hr, wind_speed
+    ora del giorno, meter_reading, square_feet, year_built, air_temperature, wind_speed, precip_depth_1_hr,
     meter_reading di due ore prima (met-2), meter_reading di un'ora prima (met-1)
 
     OUTPUT: numpy array di dimensione (inputs_row)
@@ -137,8 +137,8 @@ def process():
                 'square_feet': square_feet,
                 'year_built': year,
                 'air_temperature': temp,
-                'precip_depth_1_hr': precipitations,
                 'wind_speed': wind_speed,
+                'precip_depth_1_hr': precipitations,
                 'met-2': past_reading2,
                 'met-1': past_reading1,
             }]

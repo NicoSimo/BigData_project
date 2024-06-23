@@ -132,6 +132,12 @@ def process():
 
             prediction = float(RFModel(dask_df.compute()))
 
+            d = {'building': building, 'prediction': prediction, 'area': area}
+            pd_df = pd.DataFrame(d)
+            dd_df = dd.from_pandas(pd_df)
+
+            area_df = dd_df.groupby('area').prediction.sum().compute()
+
             if prediction:
                 log.info(f"Received building data from Redis: {key}")
                 send_to_kafka(building, prediction, area)

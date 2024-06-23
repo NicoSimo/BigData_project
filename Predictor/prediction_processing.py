@@ -12,6 +12,7 @@ import skops.io
 import dask.dataframe as dd
 from datetime import datetime
 import pandas as pd
+from Setup.kafka_initialization import producers
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -38,8 +39,6 @@ pubsub.subscribe('data_updates')
 # Load ML model
 model = skops.io.load("Predictor/rf.skops")
 
-producers = {}
-
 def RFModel(input):
     """INPUT: Dask Dataframe con colonne:
     ora del giorno, meter_reading, square_feet, year_built, air_temperature, wind_speed, precip_depth_1_hr,
@@ -50,24 +49,6 @@ def RFModel(input):
 
     pred = model.predict(input)
     return pred
-
-def initialize_kafka_producer(broker):
-    while True:
-        try:
-            producer = KafkaProducer(bootstrap_servers=[broker],
-                                     value_serializer=lambda v: json.dumps(v).encode('utf-8'))
-            log.info(f"KafkaProducer created successfully for broker {broker}.")
-            return producer
-        except NoBrokersAvailable:
-            log.warning(f"Kafka broker {broker} not available, retrying in 5 seconds...")
-            time.sleep(5)
-        except Exception as e:
-            log.error(f"Unexpected error during KafkaProducer initialization for broker {broker}: {e}")
-            return None
-
-# Initialize Kafka producers for each broker
-for broker in kafka_brokers:
-    producers[broker] = initialize_kafka_producer(broker)
 
 # Configure the weather station codes to get the weather predictions
 area_to_station_code = {

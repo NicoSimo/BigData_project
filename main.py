@@ -5,9 +5,12 @@ import Energy_consumption_sensors.sensor_scheduler as sensor_scheduler
 import Predictor.prediction_processing as prediction_processing
 import Training_scripts.rf_training as rf_training  
 import Setup.buildings_info
+from Setup.kafka_initialization import initialize_kafka_producer, kafka_brokers, producers
 
 def run_all():
     Setup.buildings_info.buildings_loader()  # Load building information
+    for broker in kafka_brokers:
+        producers[broker] = initialize_kafka_producer(broker)
 
     # Set up various threads for different components
     kafka_redis_thread = threading.Thread(target=redis_consumer.run_redis_consumer)

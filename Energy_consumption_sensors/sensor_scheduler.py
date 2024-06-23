@@ -11,6 +11,7 @@ from kafka.errors import NoBrokersAvailable
 import json
 import socket
 import logging
+from Setup.kafka_initialization import producers
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -114,18 +115,6 @@ def run_sensor_scheduler():
 
     create_topic(topic_name_postgre, num_partitions, replication_factor, kafka_brokers, retention_ms=retention_ms)
     create_topic(topic_name_redis, num_partitions, replication_factor, kafka_brokers)
-
-    producers = {}
-    for broker in kafka_brokers:
-        try:
-            producers[broker] = KafkaProducer(
-                bootstrap_servers=[broker],
-                value_serializer=lambda v: json.dumps(v).encode('utf-8')
-            )
-            log.info(f"KafkaProducer created successfully for broker {broker}.")
-        except Exception as e:
-            log.error(f"Error initializing KafkaProducer for broker {broker}: {e}")
-            continue  
 
     # Map site_id to brokers
     site_to_broker = {}

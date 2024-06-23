@@ -140,7 +140,6 @@ services:
       - redis
       - postgres
     volumes:
-      - main-app-data:/app/data
       - ${LOCAL_DATA_PATH}:/app/new_data
       - .:/app/
     networks:
@@ -153,7 +152,6 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - grafana-data:/var/lib/grafana
       - ./grafana.ini:/etc/grafana/grafana.ini
       - ./provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./provisioning/datasources:/etc/grafana/provisioning/datasources

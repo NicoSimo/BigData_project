@@ -9,7 +9,7 @@ import skops.io
 import time
 import os
 import psycopg2
-
+from sqlalchemy import create_engine
 import logging
 
 logging.basicConfig(level=logging.INFO)
@@ -28,27 +28,18 @@ def fetch_data():
     
     connection = None
     try:
-        # Connect to your PostgreSQL database
-        connection_string = f"dbname='{postgre_db}' user='{postgre_user}' host='{postgre_host}' password='{postgre_password}'"
-        connection = psycopg2.connect(connection_string)
-        cursor = connection.cursor()
+        # Create an SQLAlchemy engine to connect to the PostgreSQL database
+        connection_string = f"postgresql://{postgre_user}:{postgre_password}@{postgre_host}/{postgre_db}"
+        engine = create_engine(connection_string)
 
-        # Execute a query
-        cursor.execute(f"SELECT * FROM {table_name};")
-        rows = cursor.fetchall()
+        # Use Dask to read the SQL table into a Dask DataFrame
+        ddf = dd.read_sql_table(table_name, con=engine, index_col='id')
 
-        # Write to CSV
-        with open('Training_scripts/Training/historical_consumptions_updated.csv', 'w') as f:
-            for row in rows:
-                f.write(",".join(str(item) for item in row) + "\n")
-
-        log.info("Data fetched and written to CSV successfully.")
+        log.info("Data fetched successfully.")
+        return ddf
     except Exception as e:
         log.error(f"Database fetch error: {e}")
-    finally:
-        if connection:
-            cursor.close()
-            connection.close()
+        return None
 
 def train_model():
   try:

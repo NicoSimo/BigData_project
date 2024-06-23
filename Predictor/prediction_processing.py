@@ -134,7 +134,7 @@ def process():
 
             d = {'building': building, 'prediction': prediction, 'area': area}
             pd_df = pd.DataFrame(d)
-            dd_df = dd.from_pandas(pd_df)
+            dd_df = dd.from_pandas(pd_df, npartitions=1)
 
             area_df = dd_df.groupby('area').prediction.sum().compute()
 

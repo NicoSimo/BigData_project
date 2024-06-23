@@ -15,7 +15,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
-def fetch_data(table_name):
+def fetch_data(table_name, index_col = None):
     """
     Fetch data from PostgreSQL using Dask and return a Dask DataFrame.
     """
@@ -25,16 +25,22 @@ def fetch_data(table_name):
     postgre_password = os.getenv('POSTGRES_PASSWORD', 'Team3')
     postgre_db = os.getenv('POSTGRES_DB', 'energy_consumption')
 
-    
     try:
-        # Create an SQLAlchemy engine to connect to the PostgreSQL database
+        # Create a connection string
         connection_string = f"postgresql://{postgre_user}:{postgre_password}@{postgre_host}/{postgre_db}"
         engine = create_engine(connection_string)
-
         # Use Dask to read the SQL table into a Dask DataFrame
-        ddf = dd.read_sql_table(table_name, con=engine, index_col='id')
+        if index_col is not None:
+          ddf = dd.read_sql_table(table_name, connection_string, index_col=index_col)
+        else:
+            # Use pandas to read SQL table into a DataFrame
+            with create_engine(connection_string).connect() as conn:
+                df = pd.read_sql_table(table_name, conn)
 
-        log.info("Data fetched successfully.")
+            # Create a Dask DataFrame from the fetched data
+            ddf = dd.from_pandas(df, npartitions=1)
+        
+        log.info("Data fetched successfully from {table_name}.")
         return ddf
     except Exception as e:
         log.error(f"Database fetch error: {e}")
@@ -42,15 +48,12 @@ def fetch_data(table_name):
 
 def train_model():
   try:
-
-    # Read the relations as Dask DataFrames
-    df1 = fetch_data("sensor_data")
-    df2 = fetch_data("weather_data")
+    df1 = fetch_data("sensor_data", index_col="measurement_id")
+    df2 = fetch_data("weather_data", index_col="weather_data_id")
     df3 = fetch_data("buildings")
 
     # Merge to obtain building information
     df1 = df1.merge(df3, how="left", on="building_id").compute()
-    df1 = dd.from_pandas(df1, npartitions=4)
 
     # Merge to obtain weather information
     dfjoined = df1.merge(df2, how="left", left_on=["timestamp", "site_id"], right_on=["timestamp", "site_id"]).compute()

@@ -9,6 +9,7 @@ services:
       DATABASE_NAME: ${DATABASE_NAME}
     volumes:
       - postgres-data:/var/lib/postgresql/data
+      - ./postgres-init/postgres_dump.sql:/docker-entrypoint-initdb.d/dump.sql
     networks:
       - backend
     healthcheck:

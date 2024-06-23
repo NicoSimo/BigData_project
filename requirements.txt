@@ -13,3 +13,5 @@ seaborn
 scikit-learn==1.2.2
 matplotlib
 requests
+sqlalchemy
+psycopg2-binary

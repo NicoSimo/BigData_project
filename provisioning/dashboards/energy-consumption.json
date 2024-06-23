@@ -235,7 +235,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\n  date_trunc('hour', sd.timestamp) AS \"time\",\n  AVG(sd.meter_reading) AS \"Total Consumption\"\nFROM\n  sensor_data sd\nJOIN\n  buildings b ON sd.building_id = b.building_id\nJOIN\n  sites s ON b.site_id = s.site_id\nWHERE\n  s.site_id = 0\nGROUP BY\n  date_trunc('hour', sd.timestamp), s.site_id\nORDER BY\n  \"time\";\n",
+          "rawSql": "SELECT\n  date_trunc('hour', sd.timestamp) AS \"time\",\n  AVG(sd.meter_reading) AS \"Total Consumption\"\nFROM\n  sensor_data sd\nJOIN\n  buildings b ON sd.building_id = b.building_id\nWHERE\n  b.site_id = 1\nGROUP BY\n  date_trunc('hour', sd.timestamp), b.site_id\nORDER BY\n  \"time\";\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -256,7 +256,7 @@
           }
         }
       ],
-      "title": "Average consumption for Area 0",
+      "title": "Average consumption for Area 1",
       "type": "timeseries"
     },
     {
@@ -349,7 +349,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\n  date_trunc('hour', sd.timestamp) AS \"time\",\n  AVG(sd.meter_reading) AS \"Total Consumption\"\nFROM\n  sensor_data sd\nJOIN\n  buildings b ON sd.building_id = b.building_id\nJOIN\n  sites s ON b.site_id = s.site_id\nWHERE\n  s.site_id = 1\nGROUP BY\n  date_trunc('hour', sd.timestamp), s.site_id\nORDER BY\n  \"time\";\n",
+          "rawSql": "SELECT\n  date_trunc('hour', sd.timestamp) AS \"time\",\n  AVG(sd.meter_reading) AS \"Total Consumption\"\nFROM\n  sensor_data sd\nJOIN\n  buildings b ON sd.building_id = b.building_id\nWHERE\n  b.site_id = 2\nGROUP BY\n  date_trunc('hour', sd.timestamp), b.site_id\nORDER BY\n  \"time\";\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -370,7 +370,7 @@
           }
         }
       ],
-      "title": "Average consumption for Area 1",
+      "title": "average consumption for area 2",
       "type": "timeseries"
     },
     {
@@ -459,7 +459,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\n  CAST(building_id AS text) AS \"Building ID\",\n  AVG(meter_reading) AS \"Average Consumption\"\nFROM\n  sensor_data\nGROUP BY\n  building_id\nORDER BY\n  CAST(building_id AS integer);  -- This ensures numerical ordering\n",
+          "rawSql": "SELECT\n  CAST(building_id AS text) AS \"Building ID\",\n  AVG(meter_reading) AS \"Average Consumption\"\nFROM\n  sensor_data\nGROUP BY\n  building_id\nORDER BY\n  CAST(building_id AS integer); \n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -606,7 +606,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\n  date_trunc('hour', sd.timestamp) AS \"time\",\n  AVG(sd.meter_reading) AS \"Total Consumption\"\nFROM\n  sensor_data sd\nJOIN\n  buildings b ON sd.building_id = b.building_id\nJOIN\n  sites s ON b.site_id = s.site_id\nWHERE\n  s.site_id = 5\nGROUP BY\n  date_trunc('hour', sd.timestamp), s.site_id\nORDER BY\n  \"time\";\n",
+          "rawSql": "SELECT\n  date_trunc('hour', sd.timestamp) AS \"time\",\n  AVG(sd.meter_reading) AS \"Total Consumption\"\nFROM\n  sensor_data sd\nJOIN\n  buildings b ON sd.building_id = b.building_id\n\nWHERE\n  b.site_id = 3\nGROUP BY\n  date_trunc('hour', sd.timestamp), b.site_id\nORDER BY\n  \"time\";\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -627,7 +627,7 @@
           }
         }
       ],
-      "title": "Average consumption for Area 5",
+      "title": "Average consumption for Area 3",
       "type": "timeseries"
     },
     {
@@ -720,7 +720,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT\n  date_trunc('hour', sd.timestamp) AS \"time\",\n  AVG(sd.meter_reading) AS \"Total Consumption\"\nFROM\n  sensor_data sd\nJOIN\n  buildings b ON sd.building_id = b.building_id\nJOIN\n  sites s ON b.site_id = s.site_id\nWHERE\n  s.site_id = 14\nGROUP BY\n  date_trunc('hour', sd.timestamp), s.site_id\nORDER BY\n  \"time\";\n",
+          "rawSql": "SELECT\n  date_trunc('hour', sd.timestamp) AS \"time\",\n  AVG(sd.meter_reading) AS \"Total Consumption\"\nFROM\n  sensor_data sd\nJOIN\n  buildings b ON sd.building_id = b.building_id\nWHERE\n  b.site_id = 4\nGROUP BY\n  date_trunc('hour', sd.timestamp), b.site_id\nORDER BY\n  \"time\";\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -741,7 +741,7 @@
           }
         }
       ],
-      "title": "Average consumption for Area 14",
+      "title": "average consumption for area 4",
       "type": "timeseries"
     }
   ],

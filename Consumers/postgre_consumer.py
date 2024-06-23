@@ -20,9 +20,9 @@ def run_postgre_consumer():
 
     # PostgreSQL setup
     postgre_host = os.getenv('POSTGRE_HOST', 'postgres')
-    postgre_user = os.getenv('DATABASE_USER', 'postgres')
-    postgre_password = os.getenv('DATABASE_PASSWORD', 'Team3')
-    postgre_db = os.getenv('DATABASE_NAME', 'tdb')
+    postgre_user = os.getenv('POSTGRES_USER', 'postgres')
+    postgre_password = os.getenv('POSTGRES_PASSWORD', 'Team3')
+    postgre_db = os.getenv('POSTGRES_DB', 'energy_consumption')
 
     #define station codes:
     area_to_station_code = {
@@ -72,18 +72,17 @@ def run_postgre_consumer():
             log.error(f"Failed to connect to PostgreSQL: {e}")
             time.sleep(5)
 
-    # Batch processing configuration
+    # Batch processing configuration 
     batch_size = 25 * int(os.getenv('BATCH_SIZE',3))
     batch = []
 
     log.debug("Starting to consume messages from Kafka topic")
 
     update_time = int(os.getenv('UPDATE_TIME', 60)) #The update timne is set to 60 seconds for demo purposes
-    next_weather_update = datetime.now() + timedelta(seconds=60)  #The weather database is updated every 24 hours
+    next_weather_update = datetime.now() + timedelta(seconds=60)  #The weather database is supposed to be updated every 24 hours
 
     while True:
         try:
-            # Poll for new messages from Kafka with a longer timeout
             raw_messages = consumer.poll(timeout_ms=update_time*1000)  # 60 seconds timeout for demo purposes
             if not raw_messages:
                 log.debug("No messages received in this poll")
@@ -95,7 +94,7 @@ def run_postgre_consumer():
                     log.debug(f"Decoded message: {data}")
                     batch.append(data)
 
-            # Check if the batch size is reached or the time interval has elapsed
+            # Check if the batch size is reached 
             if len(batch) >= batch_size:
                 if batch:
                     try:

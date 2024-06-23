@@ -2,14 +2,11 @@ services:
   postgres:
     container_name: postgres
     image: postgres
-    environment:
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      POSTGRES_DB: ${DATABASE_NAME}
-      DATABASE_NAME: ${DATABASE_NAME}
+    env_file:
+      - ./config/postgres.env
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ./postgres-init/postgres_dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./config/postgres-init/postgres_dump.sql:/docker-entrypoint-initdb.d/dump.sql
     networks:
       - backend
     healthcheck:
@@ -129,7 +126,7 @@ services:
   main_app:
     container_name: main_app
     env_file: 
-      - ./.env
+      - ./config/main.env
     build:
       context: .
       dockerfile: Dockerfile
@@ -153,11 +150,11 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./grafana.ini:/etc/grafana/grafana.ini
+      - ./config/grafana.ini:/etc/grafana/grafana.ini
       - ./provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./provisioning/datasources:/etc/grafana/provisioning/datasources
     env_file: 
-      - ./grafana.env  
+      - ./config/grafana.env  
     networks:
       - backend
       - frontend

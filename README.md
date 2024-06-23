@@ -1,5 +1,11 @@
 Repository for the Big Data Technologies course (A.Y 2023/2024) of the Master in Data Science @ University of Trento.
 
+PROJECT #3
+------------------------------------------------------------------------------------------------------------------------
+Energy Consumption Forecasting: Develop a system for forecasting energy consumption patterns at both macro and micro levels. Utilize data from smart meters, weather forecasts, 
+historical consumption data, and other relevant sources to predict future energy demand. Implement machine learning algorithms to identify trends, patterns, and anomalies in energy 
+consumption, helping utilities optimize energy production and distribution.
+
 ![alt text](project_schema.png)
 
 The project uses the dataset : ASHRAE - Great Energy Predictor III available on Kaggle at : https://www.kaggle.com/competitions/ashrae-energy-prediction/overview.

@@ -26,6 +26,7 @@ def get_latest_measurements(station_code, count=4):
     return {'avg_temp' : mean(temperatures_list), 'avg_wind_speed' : mean(wind_speed_list), 'precipitations' : sum(precip_list) }
 
 def extract_data(data_list, param_name):
+    now = datetime.now()
     data = []
     for item in data_list:
         timestamp_str = item.find('ns0:data', namespaces={'ns0': 'http://www.meteotrentino.it/'}).text
@@ -57,8 +58,6 @@ def get_past_measurements(station_code, count = 24):
     precipitation_data = []
     wind_speeds = root[6]
     wind_speed_data = []
-
-    now = datetime.now()
 
     temperature_data = extract_data(temperatures, 'temperatura')
     wind_speed_data = extract_data(wind_speeds, 'velocita')

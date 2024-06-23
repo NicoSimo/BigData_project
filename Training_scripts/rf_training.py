@@ -48,7 +48,7 @@ def train_model():
 
     # Read the dataframes as Dask Dataframes
     df1 = dd.read_csv("Training_scripts/Training/historical_consumptions.csv")
-    df2 = dd.read_csv("Training_scripts/Training/historical_weather.csv")
+    df2 = dd.read_csv("Training_scripts/Training/weather_train.csv")
     df3 = dd.read_csv("Training_scripts/Training/building_data.csv")
 
     # Merge to obtain building information
@@ -63,7 +63,7 @@ def train_model():
     dfjoined.timestamp = pd.to_datetime(dfjoined.timestamp, format="%Y-%m-%d %H:%M:%S")
 
     # Features selction
-    cols_to_keep = [0, 1, 2, 3, 5, 6, 8, 9, 10]
+    cols_to_keep = [0, 1, 2, 3, 5, 6, 8, 11, 14]
     df = dfjoined.iloc[:,cols_to_keep]
 
     # Insert of model target
@@ -88,11 +88,12 @@ def train_model():
         i+=1
 
     df.precip_depth_1_hr = df.precip_depth_1_hr.fillna(0)
+
     for index, row in df.iterrows():
-        if df.at[index, 'precip_depth_1_hr'] == 0:
-              df.at[index, 'cloud_coverage'] = 0
-        else:
-              df.at[index, 'cloud_coverage'] = 6.0
+        i = 1
+        while (pd.isnull(df.at[index, 'wind_speed'])):
+            df.at[index, 'wind_speed'] = df.at[index + i, "wind_speed"]
+            i += 1
 
     # We are only interested in the hour of the day
     df.timestamp = df.timestamp.dt.hour

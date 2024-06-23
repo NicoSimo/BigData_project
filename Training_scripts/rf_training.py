@@ -44,9 +44,9 @@ def train_model():
   try:
 
     # Read the relations as Dask DataFrames
-    df1 = dd.read_sql_table("sensor_data")
-    df2 = dd.read_sql_table("weather_data")
-    df3 = dd.read_sql_table("buildings")
+    df1 = fetch_data("sensor_data")
+    df2 = fetch_data("weather_data")
+    df3 = fetch_data("buildings")
 
     # Merge to obtain building information
     df1 = df1.merge(df3, how="left", on="building_id").compute()

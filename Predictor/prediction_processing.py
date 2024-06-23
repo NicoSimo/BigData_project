@@ -136,6 +136,7 @@ def process():
                 'year_built': year,
                 'air_temperature': temp,
                 'precip_depth_1_hr': precipitations,
+                #'wind_speed':
                 'met-2': past_reading2,
                 'met-1': past_reading1,
             }]

@@ -48,7 +48,7 @@ def train_model():
 
     # Read the dataframes as Dask Dataframes
     df1 = dd.read_csv("Training_scripts/Training/historical_consumptions.csv")
-    df2 = dd.read_csv("Training_scripts/Training/weather_train.csv")
+    df2 = dd.read_csv("Training_scripts/Training/historical_weather.csv")
     df3 = dd.read_csv("Training_scripts/Training/building_data.csv")
 
     # Merge to obtain building information
@@ -63,7 +63,7 @@ def train_model():
     dfjoined.timestamp = pd.to_datetime(dfjoined.timestamp, format="%Y-%m-%d %H:%M:%S")
 
     # Features selction
-    cols_to_keep = [0, 1, 2, 3, 5, 6, 8, 11, 14]
+    cols_to_keep = [0, 1, 2, 3, 5, 6, 8, 9, 10]
     df = dfjoined.iloc[:,cols_to_keep]
 
     # Insert of model target

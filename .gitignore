@@ -8,3 +8,7 @@ Predictor/__pycache__/
 Sensor_core/__pycache__/
 Setup/__pycache__/
 Training_scripts/__pycache__/
+Predictor/rf_test.skops
+Training_scripts/Training/historical_consumptions_updated.csv
+Q&A.md
+WORK_IN_PROGRESS.md

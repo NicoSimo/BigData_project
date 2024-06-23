@@ -60,8 +60,9 @@ def train_model():
     dfjoined.timestamp = pd.to_datetime(dfjoined.timestamp, format="%Y-%m-%d %H:%M:%S")
 
     # Features selction
-    cols_to_keep = [0, 1, 2, 3, 5, 6, 8, 9, 10]
-    df = dfjoined.iloc[:,cols_to_keep]
+    cols_to_keep = ["building_id", "timestamp", "meter_reading", "site_id", "square_feet",
+                    "year_built", "air_temperature", "wind_speed", "precip_depth_1_hr"]
+    df = dfjoined.loc[:,cols_to_keep]
 
     # Insert of model target
     df.insert(len(df.columns), 'target', 0)
@@ -71,7 +72,9 @@ def train_model():
       dfbuild = dfbuild.reset_index()
       for index, row in dfbuild.iterrows():
         if index+3 < dfbuild.shape[0]:
-          df.at[dfbuild.at[index, 'index'],'target'] = dfbuild.iat[index+1, 3] + dfbuild.iat[index+2, 3] + dfbuild.iat[index+3, 3]
+          df.at[dfbuild.at[index, 'index'],'target'] = (dfbuild.at[index+1, "meter_reading"] +
+                                                        dfbuild.at[index+2, "meter_reading"] +
+                                                        dfbuild.at[index+3, "meter_reading"])
 
     # Sorting of the dataframe based on building and timestamp
     df = df.sort_values(by=["building_id", "timestamp"], axis=0, kind="stable")
@@ -79,10 +82,10 @@ def train_model():
 
     # Filling missing values with most recent data
     for index, row in df.iterrows():
-      i=1
+      i = 1
       while(pd.isnull(df.at[index, 'air_temperature'])):
         df.at[index, 'air_temperature'] = df.at[index+i, "air_temperature"]
-        i+=1
+        i += 1
 
     df.precip_depth_1_hr = df.precip_depth_1_hr.fillna(0)
 
@@ -105,8 +108,13 @@ def train_model():
             df.at[index, "met-1"] = df.at[index-1, "meter_reading"]
 
     # Feature selection
-    col_to_keep = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11]
-    dfrf = df.iloc[:, col_to_keep]
+    col_to_keep = ["timestamp", "meter_reading", "square_feet", "year_built", "air_temperature",
+                   "wind_speed", "precip_depth_1_hr", "met-2", "met-1", "target"]
+    dfrf = df.loc[:, col_to_keep]
+
+    # Rearranging columns order
+    dfrf = dfrf[["timestamp", "meter_reading", "square_feet", "year_built", "air_temperature",
+                 "wind_speed", "precip_depth_1_hr", "met-2", "met-1", "target"]]
 
     # Random forest instantiation and training
     clf = RandomForestRegressor(n_estimators=250, max_depth=11, random_state=42, max_features="sqrt")

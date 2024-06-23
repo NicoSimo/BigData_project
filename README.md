@@ -1,9 +1,12 @@
 Repository for the Big Data Technologies course (A.Y 2023/2024) of the Master in Data Science @ University of Trento.
 
+![alt text](project_schema.png)
+
 The project uses the dataset : ASHRAE - Great Energy Predictor III available on Kaggle at : https://www.kaggle.com/competitions/ashrae-energy-prediction/overview.
 
 The dataset_prep.py requires the download of the dataset, to run the script you need to modify the path at line 29 --> 'native_dataset_folder'. 
 You can also decide where to store the data by changing the path at line 32 --> 'base_dir'.
+The first portion of data will be stored on the postgreDB, acting as our 'historical consumptions', while the second portion will arrive through the sensor trying to simulate actual sensors behaviour.
 
 The docker-compose.yml file is used to set up the different containers used in the project. (One for each application to take advantage of the lightweight nature of Docker's Containers).
 

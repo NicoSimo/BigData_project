@@ -38,10 +38,8 @@ def extract_data(data_list, param_name):
         # Check if timestamp is within the past 24 hours and at hourly intervals
         if now - timedelta(hours=24) <= timestamp <= now:
             if timestamp.minute == 0 and timestamp.second == 0:
-                data.append({
-                    'timestamp': timestamp,
-                    'value': value
-                })
+                data.append([timestamp, value])
+
     return data
 
 def get_past_measurements(station_code, count = 24):
@@ -60,7 +58,7 @@ def get_past_measurements(station_code, count = 24):
     wind_speed_data = []
 
     temperature_data = extract_data(temperatures, 'temperatura')
-    wind_speed_data = extract_data(wind_speeds, 'velocita')
-    precipitation_data = extract_data(precipitations, 'valore')
+    wind_speed_data = extract_data(wind_speeds, 'v')
+    precipitation_data = extract_data(precipitations, 'pioggia')
 
     return temperature_data, wind_speed_data, precipitation_data

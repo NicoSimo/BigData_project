@@ -15,18 +15,16 @@ import logging
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
-def fetch_data():
+def fetch_data(table_name):
     """
-    Fetch data from PostgreSQL and write to CSV.
+    Fetch data from PostgreSQL using Dask and return a Dask DataFrame.
     """
     
     postgre_host = os.getenv('POSTGRES_HOST', 'postgres')
     postgre_user = os.getenv('POSTGRES_USER', 'postgres')
     postgre_password = os.getenv('POSTGRES_PASSWORD', 'Team3')
     postgre_db = os.getenv('DATABASE_NAME', 'testdb')
-    table_name = 'sensor_data'
     
-    connection = None
     try:
         # Create an SQLAlchemy engine to connect to the PostgreSQL database
         connection_string = f"postgresql://{postgre_user}:{postgre_password}@{postgre_host}/{postgre_db}"
@@ -43,13 +41,11 @@ def fetch_data():
 
 def train_model():
   try:
-    # Fetch data from PostgreSQL
-    fetch_data()
 
-    # Read the dataframes as Dask Dataframes
-    df1 = dd.read_csv("Training_scripts/Training/historical_consumptions.csv")
-    df2 = dd.read_csv("Training_scripts/Training/historical_weather.csv")
-    df3 = dd.read_csv("Training_scripts/Training/building_data.csv")
+    # Read the relations as Dask DataFrames
+    df1 = dd.read_sql_table("sensor_data")
+    df2 = dd.read_sql_table("weather_data")
+    df3 = dd.read_sql_table("buildings")
 
     # Merge to obtain building information
     df1 = df1.merge(df3, how="left", on="building_id").compute()

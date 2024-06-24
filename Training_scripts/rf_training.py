@@ -60,60 +60,61 @@ def train_model():
 
     # Re-indexing and conversion of timestamps
     dfjoined = dfjoined.reset_index(drop=True)
-    dfjoined.timestamp = pd.to_datetime(dfjoined.timestamp, format="%Y-%m-%d %H:%M:%S")
+    dfjoined = dd.from_pandas(dfjoined, npartitions=2)
+    dfjoined.timestamp = pd.to_datetime(dfjoined.timestamp, format="%Y-%m-%d %H:%M:%S").compute()
 
     # Features selction
     cols_to_keep = ["building_id", "timestamp", "meter_reading", "site_id", "square_feet",
                     "year_built", "air_temperature", "wind_speed", "precip_depth_1_hr"]
-    df = dfjoined.loc[:,cols_to_keep]
+    df = dfjoined.loc[:,cols_to_keep].compute()
 
     # Insert of model target
-    df.insert(len(df.columns), 'target', 0)
-    building_list = pd.unique(df.building_id)
+    df.insert(len(df.columns), 'target', 0).compute()
+    building_list = pd.unique(df.building_id).compute()
     for building in building_list:
-      dfbuild = df[df.building_id == building]
-      dfbuild = dfbuild.reset_index()
+      dfbuild = df[df.building_id == building].compute()
+      dfbuild = dfbuild.reset_index().compute()
       for index, row in dfbuild.iterrows():
         if index+3 < dfbuild.shape[0]:
           df.at[dfbuild.at[index, 'index'],'target'] = (dfbuild.at[index+1, "meter_reading"] +
                                                         dfbuild.at[index+2, "meter_reading"] +
-                                                        dfbuild.at[index+3, "meter_reading"])
+                                                        dfbuild.at[index+3, "meter_reading"]).compute()
 
     # Sorting of the dataframe based on building and timestamp
-    df = df.sort_values(by=["building_id", "timestamp"], axis=0, kind="stable")
-    df = df.reset_index(drop=True)
+    df = df.sort_values(by=["building_id", "timestamp"], axis=0, kind="stable").compute()
+    df = df.reset_index(drop=True).compute()
 
     # Filling missing values with most recent data
     for index, row in df.iterrows():
       i = 1
       while(pd.isnull(df.at[index, 'air_temperature'])):
-        df.at[index, 'air_temperature'] = df.at[index+i, "air_temperature"]
+        df.at[index, 'air_temperature'] = df.at[index+i, "air_temperature"].compute()
         i += 1
 
-    df.precip_depth_1_hr = df.precip_depth_1_hr.fillna(0)
+    df.precip_depth_1_hr = df.precip_depth_1_hr.fillna(0).compute()
 
     for index, row in df.iterrows():
         i = 1
         while (pd.isnull(df.at[index, 'wind_speed'])):
-            df.at[index, 'wind_speed'] = df.at[index + i, "wind_speed"]
+            df.at[index, 'wind_speed'] = df.at[index + i, "wind_speed"].compute()
             i += 1
 
     # We are only interested in the hour of the day
-    df.timestamp = df.timestamp.dt.hour
+    df.timestamp = df.timestamp.dt.hour.compute()
 
     # Insert the previous two metric readings
-    df.insert(len(df.columns)-1, 'met-2', 0)
-    df.insert(len(df.columns)-1, 'met-1', 0)
+    df.insert(len(df.columns)-1, 'met-2', 0).compute()
+    df.insert(len(df.columns)-1, 'met-1', 0).compute()
 
     for index, row in df.iterrows():
         if (index%5880 not in [0,1]):
-            df.at[index, "met-2"] = df.at[index-2, "meter_reading"]
-            df.at[index, "met-1"] = df.at[index-1, "meter_reading"]
+            df.at[index, "met-2"] = df.at[index-2, "meter_reading"].compute()
+            df.at[index, "met-1"] = df.at[index-1, "meter_reading"].compute()
 
     # Feature selection
     col_to_keep = ["timestamp", "meter_reading", "square_feet", "year_built", "air_temperature",
                    "wind_speed", "precip_depth_1_hr", "met-2", "met-1", "target"]
-    dfrf = df.loc[:, col_to_keep]
+    dfrf = df.loc[:, col_to_keep].compute()
 
     # Rearranging columns order
     dfrf = dfrf[["timestamp", "meter_reading", "square_feet", "year_built", "air_temperature",
@@ -121,7 +122,7 @@ def train_model():
 
     # Random forest instantiation and training
     clf = RandomForestRegressor(n_estimators=250, max_depth=11, random_state=42, max_features="sqrt")
-    clf.fit(dfrf.iloc[:,:-1], dfrf.iloc[:,-1])
+    clf.fit(dfrf.iloc[:,:-1].compute(), dfrf.iloc[:,-1].compute())
 
     if clf:
       skops.io.dump(clf, "Predictor/rf_test.skops")
@@ -142,7 +143,7 @@ def train_model():
 
 def run_training():
 
-  RETRAIN_TIME = int(os.getenv('RETRAIN_TIME', 100))  
+  RETRAIN_TIME = int(os.getenv('RETRAIN_TIME', 15))
   while True:
     # Retrain the model every RETRAIN_TIME seconds
     train_model()

@@ -38,9 +38,8 @@ To run the whole project you need to (in order):
 - (OPTIONAL) 'Docker ps' to verify the status
 
 Now the data start to flow from the csv to both Redis and Postgre through Kafka.
-There are 3 topics :
+There are 2 topics used for this:
 -   'energy_consumption_redis' is used to send the data on Redis;
--   ‘energy_consumption_postgre’ is set with a retention parameter and used to send the data on Postgre every 3 updates to ease the load on the DB
--   'energy_consumption_predictions' is used by Redis to upload the predictions performed on the upcoming data 
+-   ‘energy_consumption_postgre’ is set with a retention parameter and used to send the data on Postgre every 3 updates to ease the load on the DB (In a real world application it would be 1 batch processing per day).
 
-To see a live dashboard, just type 'localhost:3000' on a browser, that will open a grafana dashboard directly connected to the PostgreSQL database.
+To see a live dashboard, just type 'localhost:3000' on a browser, that will open a grafana dashboard directly connected to the PostgreSQL database (Both the USER and PASSWORD are left as default : 'admin').

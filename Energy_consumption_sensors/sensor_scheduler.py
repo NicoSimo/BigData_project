@@ -111,7 +111,7 @@ def run_sensor_scheduler():
     num_partitions = 5
     replication_factor = 3
 
-    retention_ms = os.getenv('POSTGRE_RETENTION_MS', 120000)
+    retention_ms = os.getenv('POSTGRE_RETENTION_MS', 120000)  # time in milliseconds
 
     create_topic(topic_name_postgre, num_partitions, replication_factor, kafka_brokers, retention_ms=retention_ms)
     create_topic(topic_name_redis, num_partitions, replication_factor, kafka_brokers)

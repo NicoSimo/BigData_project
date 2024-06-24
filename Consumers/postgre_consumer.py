@@ -38,7 +38,6 @@ def run_postgre_consumer():
         try:
             log.debug(f"Attempting to connect to Kafka brokers: {kafka_brokers}")
             consumer = KafkaConsumer(
-                topic_name,
                 bootstrap_servers=kafka_brokers,
                 auto_offset_reset='earliest',
                 group_id='energy_consumption_postgre',

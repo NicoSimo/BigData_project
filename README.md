@@ -37,3 +37,5 @@ There are 2 topics used for this:
 -   ‘energy_consumption_postgre’ is set with a retention parameter and used to send the data on Postgre every 3 updates to ease the load on the DB (In a real world application it would be 1 batch processing per day).
 
 To see a live dashboard, just type 'localhost:3000' on a browser, that will open a grafana dashboard directly connected to the PostgreSQL database (Both the USER and PASSWORD are left as default : 'admin').
+ 
+Made by Tommaso Rondani, Nicolò Simonato and Raffaele Sinani

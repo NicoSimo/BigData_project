@@ -22,13 +22,11 @@ The repository `Training_scripts` contains the code used to train the machine le
 
 The repositoty `Setup` contains the scripts necessary to initialize Kafka producers and to load the buildings data into Redis.
 
-In the `Consumers` repository, there are 2 different consumers. 
--The first one is the `postgre_consumer`, used to transfer the data on the PostgreSQL database to store the data.
--The second one is the `redis_consumer`, used to transfer the data on Redis to perform the prediction.
+In the `Consumers` repository, there are 2 different consumers. The first one is the `postgre_consumer`, used to transfer the data on the PostgreSQL database to store the data.
+The second one is the `redis_consumer`, used to transfer the data on Redis to perform the prediction.
 
-Finally, the `Predictor` repository contains 2 scripts, as well as the machine learning model dump:
--`weather_measuremtents.py` contains both the function that collects the past 24 hours of data used to update the database and the one that collects the past hour of data to use to predict the energy consumption.
--`prediction_processing.py` that actually performs the prediction by inputing incoming data, weather measurements and buildings information.
+Finally, the `Predictor` repository contains 2 scripts, as well as the machine learning model dump:`weather_measuremtents.py` contains both the function that collects the past 24 hours of data used to update the database and the one that collects the past hour of data to use to predict the energy consumption.`prediction_processing.py` that actually performs the prediction by inputing incoming data, weather measurements and buildings information.
+
 The info such as DB names, pw, user are in the .env file. The file is uploaded given the educational goal of the project. 
 
 To run the whole project you just need to run `docker-compose up --build -d` to run the containers

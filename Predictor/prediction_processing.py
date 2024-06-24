@@ -132,6 +132,7 @@ def process():
 
             prediction = float(RFModel(dask_df.compute()))
 
+
             if prediction:
                 log.info(f"Received building data from Redis: {key}")
                 send_to_kafka(building, prediction, area)

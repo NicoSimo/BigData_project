@@ -24,6 +24,15 @@ def run_postgre_consumer():
     postgre_password = os.getenv('POSTGRES_PASSWORD', 'Team3')
     postgre_db = os.getenv('POSTGRES_DB', 'energy_consumption')
 
+    #define station codes:
+    area_to_station_code = {
+    1: "T0409",  # Trento
+    2: "T0147",  # Rovereto
+    3: "T0367",  # Cavalese
+    4: "T0179"   # Tione
+    }
+
+
     # Retry mechanism to wait for Kafka broker
     while True:
         try:
@@ -109,53 +118,56 @@ def run_postgre_consumer():
                         log.error(f"Failed to insert data into PostgreSQL: {e}")
             
             # Also update the weather_measurements table every 24 hours
-                if datetime.now() >= next_weather_update:
-                    temperature_data, wind_speed_data, precipitation_data = wm.get_past_measurements()
-                    
-                    # Insert temperature data
-                    if temperature_data:
-                        try:
-                            print("Inserting temperature data into PostgreSQL")
-                            insert_query = "INSERT INTO weather_measurements (timestamp, parameter, value) VALUES %s"
-                            extras.execute_values(
-                                cur, insert_query,
-                                [(d['timestamp'], 'temperature', d['value']) for d in temperature_data]
-                            )
-                            conn.commit()
-                            print("Temperature data inserted successfully")
-                        except Exception as e:
-                            conn.rollback()  # Rollback in case of error
-                            print(f"Failed to insert temperature data into PostgreSQL: {e}")
-                    
-                    # Insert wind speed data
-                    if wind_speed_data:
-                        try:
-                            print("Inserting wind speed data into PostgreSQL")
-                            insert_query = "INSERT INTO weather_measurements (timestamp, parameter, value) VALUES %s"
-                            extras.execute_values(
-                                cur, insert_query,
-                                [(d['timestamp'], 'wind_speed', d['value']) for d in wind_speed_data]
-                            )
-                            conn.commit()
-                            print("Wind speed data inserted successfully")
-                        except Exception as e:
-                            conn.rollback()  # Rollback in case of error
-                            print(f"Failed to insert wind speed data into PostgreSQL: {e}")
-                    
-                    # Insert precipitation data
-                    if precipitation_data:
-                        try:
-                            print("Inserting precipitation data into PostgreSQL")
-                            insert_query = "INSERT INTO weather_measurements (timestamp, parameter, value) VALUES %s"
-                            extras.execute_values(
-                                cur, insert_query,
-                                [(d['timestamp'], 'precipitation', d['value']) for d in precipitation_data]
-                            )
-                            conn.commit()
-                            print("Precipitation data inserted successfully")
-                        except Exception as e:
-                            conn.rollback()  # Rollback in case of error
-                            print(f"Failed to insert precipitation data into PostgreSQL: {e}")
+            if datetime.now() >= next_weather_update:
+                weather_data_to_insert = []
+                for i in range(1, 5):
+                    try:
+                        # Get weather data
+                        temperature_data, wind_speed_data, precipitation_data = wm.get_past_measurements(area_to_station_code[i])
+                        
+                        # Ensure all data is valid
+                        if temperature_data is None or wind_speed_data is None or precipitation_data is None:
+                            log.error(f"Received None data for station {area_to_station_code[i]}")
+                            continue
+
+                        # Process each timestamp-value pair
+                        site_id = i
+                        for temp_item, wind_item, precip_item in zip(temperature_data, wind_speed_data, precipitation_data):
+                            if len(temp_item) != 2 or len(wind_item) != 2 or len(precip_item) != 2:
+                                log.warning(f"Invalid data format for station {area_to_station_code[i]}")
+                                continue
+
+                            timestamp = temp_item[0]
+                            air_temperature = temp_item[1]
+                            wind_speed = wind_item[1]
+                            precip_depth_1_hr = precip_item[1]
+
+                            # Append data to batch insert list
+                            weather_data_to_insert.append((site_id, timestamp, air_temperature, wind_speed, precip_depth_1_hr))
+
+                        log.info(f"Processed weather data for station {area_to_station_code[i]}")
+                    except Exception as e:
+                        log.error(f"Failed to get or process weather data for station {area_to_station_code[i]}: {e}")
+                
+                # Batch insert data into the weather_measurements table
+                if weather_data_to_insert:
+                    try:
+                        weather_insert_query = """
+                        INSERT INTO weather_data (site_id, timestamp, air_temperature, wind_speed, precip_depth_1_hr)
+                        VALUES (%s, %s, %s, %s, %s);
+                        """
+                        psycopg2.extras.execute_batch(cur, weather_insert_query, weather_data_to_insert)
+                        conn.commit()
+                        log.info("Weather data inserted successfully")
+                    except Exception as e:
+                        conn.rollback()  # Rollback in case of error
+                        log.error(f"Failed to insert weather data into PostgreSQL: {e}")
+
+                        # Update the next weather update time
+                        next_weather_update = datetime.now() + timedelta(seconds=60)
+                    except Exception as e:
+                        log.error(f"Failed to insert weather data into PostgreSQL: {e}")
+
 
         except Exception as e:
             log.error(f"Error during message consumption or processing: {e}")

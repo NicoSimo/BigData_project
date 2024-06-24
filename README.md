@@ -10,13 +10,9 @@ consumption, helping utilities optimize energy production and distribution.
 
 The project uses the dataset : ASHRAE - Great Energy Predictor III available on Kaggle at : https://www.kaggle.com/competitions/ashrae-energy-prediction/overview.
 
-The dataset_prep.py requires the download of the dataset, to run the script you need to modify the path at line 29 --> 'native_dataset_folder'. 
-You can also decide where to store the data by changing the path at line 32 --> 'base_dir'.
-The first portion of data will be stored on the postgreDB, acting as our 'historical consumptions', while the second portion will arrive through the sensor trying to simulate actual sensors behaviour.
-
 The docker-compose.yml file is used to set up the different containers used in the project. (One for each application to take advantage of the lightweight nature of Docker's Containers).
 
-The dataset_prep.py prepares and organizes the data in folders that are then moved to a PostgreSQL container and are then used to populate the database.
+The Postgres database is going to be immediately populated by the database dump contained in config/postgres-init, and later is going to be further expanded by Consumers/postgre_consumer.py, which is going to periodically insert new data in the database.
 
 The repository '/Sensor_core/' contains the file 'sensor_object.py' which contains the 'Sensor class' used to build the structure of the sensors.
 
@@ -24,18 +20,18 @@ The repository '/Energy_consumption_sensor/' contains the 'sensor_publisher.py' 
 
 The repository '/Training_scripts/' contains the code used to train the machine learning model.
 
-In the 'Consumers' repository, there are 2 different consumers. 
-The first one is the postgre_consumer, used to transfer the data on the PostgreSQL database to store the data.
-The second one is the redis_consumer, used to transfer the data on Redis to perform the prediction.
+The repositoty 'Setup' contains the scripts necessary to initialize Kafka producers and to load the buildings data into Redis.
 
+In the 'Consumers' repository, there are 2 different consumers. 
+-The first one is the postgre_consumer, used to transfer the data on the PostgreSQL database to store the data.
+-The second one is the redis_consumer, used to transfer the data on Redis to perform the prediction.
+
+Finally, the 'Predictor' repository contains 2 scripts, as well as the machine learning model dump:
+-weather_measuremtents.py contains both the function that collects the past 24 hours of data used to update the database and the one that collects the past hour of data to use to predict the energy consumption.
+-prediction_processing.py that actually performs the prediction by inputing incoming data, weather measurements and buildings information.
 The info such as DB names, pw, user are in the .env file. The file is uploaded given the educational goal of the project. 
 
-To run the whole project you need to (in order):
-
-- Download the dataset 
-- Fix the paths in the dataset_prep.py file 
-- 'Docker-compose up --build -d' to run the containers
-- (OPTIONAL) 'Docker ps' to verify the status
+To run the whole project you just need to run `docker-compose up --build -d` to run the containers
 
 Now the data start to flow from the csv to both Redis and Postgre through Kafka.
 There are 2 topics used for this:

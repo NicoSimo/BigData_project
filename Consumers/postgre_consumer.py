@@ -69,7 +69,7 @@ def run_postgre_consumer():
 
     log.debug("Starting to consume messages from Kafka topic")
 
-    update_time = int(os.getenv('UPDATE_TIME', 60)) #The update timne is set to 60 seconds for demo purposes
+    update_time = int(os.getenv('UPDATE_TIME', 60)) #The update time is set to n seconds for demo purposes
     next_weather_update = datetime.now() + timedelta(seconds=60)  #The weather database is supposed to be updated every 24 hours
 
     while True:

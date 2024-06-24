@@ -43,4 +43,4 @@ There are 3 topics :
 -   ‘energy_consumption_postgre’ is set with a retention parameter and used to send the data on Postgre every 3 updates to ease the load on the DB
 -   'energy_consumption_predictions' is used by Redis to upload the predictions performed on the upcoming data 
 
-To see a live dashboard, just type 'localhost:3000' on a browser, that will open a grafana dashboard directly connected to the PostgreSQL database.
+To see a live dashboard, just type 'localhost:3000' on a browser, that will open a grafana dashboard directly connected to the PostgreSQL database (Both the USER and PASSWORD are left as default : 'admin').

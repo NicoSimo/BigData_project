@@ -54,7 +54,7 @@ def train_model():
 
     # Merge to obtain building information
     df1 = df1.merge(df3, how="left", on="building_id").compute()
-
+    df1 = dd.from_pandas(df1, npartitions=2)
     # Merge to obtain weather information
     dfjoined = df1.merge(df2, how="left", left_on=["timestamp", "site_id"], right_on=["timestamp", "site_id"]).compute()
 

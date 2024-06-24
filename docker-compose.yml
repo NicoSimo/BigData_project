@@ -23,7 +23,7 @@ services:
       - "6379:6379"
     volumes:
       - redis-data:/data
-      - .config/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
     networks:
       - backend
@@ -138,7 +138,7 @@ services:
       - redis
       - postgres
     volumes:
-      - ${LOCAL_DATA_PATH}:/app/new_data
+      - ./New_data:/app/new_data
       - .:/app/
     networks:
       - backend

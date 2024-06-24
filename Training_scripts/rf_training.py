@@ -104,7 +104,7 @@ def train_model():
         clf.fit(dfrf.iloc[:, :-1], dfrf.iloc[:, -1])
 
         if clf:
-            skops.io.dump(clf, "Predictor/rf_test.skops")
+            skops.io.dump(clf, "Predictor/rf.skops")
             log.info("Model training completed successfully. SIA SEMPRE RINGRAZIATO IL SIGNORE!")
         else:
             log.error("Model training did not complete successfully.")
@@ -113,7 +113,7 @@ def train_model():
         log.warning(f"An error occurred during model training: {e}")
 
 def run_training():
-    RETRAIN_TIME = int(os.getenv('RETRAIN_TIME', 15))
+    RETRAIN_TIME = int(os.getenv('RETRAIN_TIME', 120))
     while True:
         # Retrain the model every RETRAIN_TIME seconds
         train_model()

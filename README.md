@@ -22,7 +22,7 @@ The repository '/Sensor_core/' contains the file 'sensor_object.py' which contai
 
 The repository '/Energy_consumption_sensor/' contains the 'sensor_publisher.py' file used to start Kafka by uploading the data from the '/absulute_path/Data/New_data/Sensors/new_consumptions.csv' file used to simulate the sensors retrieving the new data.
 
-The repository '/Training/' contains the code used to train the machine learning model.
+The repository '/Training_scripts/' contains the code used to train the machine learning model.
 
 In the 'Consumers' repository, there are 2 different consumers. 
 The first one is the postgre_consumer, used to transfer the data on the PostgreSQL database to store the data.

@@ -29,7 +29,7 @@ Finally, the `Predictor` repository contains 2 scripts, as well as the machine l
 
 The info such as DB names, pw, user are in the .env file. The file is uploaded given the educational goal of the project. 
 
-To run the whole project you just need to run `docker-compose up --build -d` to run the containers
+To run the whole project you just need to run `docker-compose up --build -d` to run the containers and to see the outputs it is sufficient to run `docker logs main_app`.
 
 Now the data start to flow from the csv to both Redis and Postgre through Kafka.
 There are 2 topics used for this:
